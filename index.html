@@ -768,6 +768,365 @@
     .cover-toc { grid-template-columns: 1fr; }
     .tab-content-wrap { padding: 20px 12px 48px; }
   }
+
+  /* ============================================================
+     CAPEX SCENARIO CARDS
+  ============================================================ */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .scenario-card {
+    border-radius: 10px;
+    padding: 18px 16px;
+    border: 1px solid;
+  }
+  .scenario-card.optimistic   { background: var(--teal-50);  border-color: var(--teal-100); }
+  .scenario-card.base         { background: var(--blue-50);  border-color: var(--blue-100); }
+  .scenario-card.conservative { background: var(--amber-50); border-color: var(--amber-100); }
+  .sc-name {
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .scenario-card.optimistic   .sc-name { color: var(--teal-600); }
+  .scenario-card.base         .sc-name { color: var(--blue-700); }
+  .scenario-card.conservative .sc-name { color: var(--amber-600); }
+  .sc-total {
+    font-size: 26px; font-weight: 600; line-height: 1.1;
+    margin: 8px 0 2px;
+  }
+  .scenario-card.optimistic   .sc-total { color: var(--teal-600); }
+  .scenario-card.base         .sc-total { color: var(--blue-900); }
+  .scenario-card.conservative .sc-total { color: var(--amber-600); }
+  .sc-per-kw { font-size: 12px; color: var(--gray-700); margin-bottom: 10px; }
+  .sc-desc   { font-size: 12px; color: var(--gray-700); line-height: 1.55; }
+
+  /* ============================================================
+     CALCULATOR STYLES
+  ============================================================ */
+  /* INSTRUCTION BOX */
+  .instruction {
+    margin-top: 36px;
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    border-left: 4px solid var(--blue-700);
+    border-radius: 0 10px 10px 0;
+    padding: 18px 20px;
+  }
+  .instruction-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--blue-700);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .instruction p {
+    font-size: 13px;
+    color: var(--gray-700);
+    line-height: 1.7;
+  }
+  .instruction strong { color: var(--blue-900); }
+
+  /* LAYOUT: two columns */
+  .calc-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+    align-items: start;
+  }
+
+  /* CONTROLS PANEL */
+  .controls-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--blue-50);
+  }
+
+  /* CONTROL ROW */
+  .control-row {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .control-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .control-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-900);
+  }
+  .control-unit {
+    font-size: 11px;
+    color: var(--gray-700);
+  }
+
+  /* Number input + buttons */
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .step-btn {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    border: 1.5px solid var(--blue-200);
+    background: var(--white);
+    color: var(--blue-700);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+    transition: background 0.12s, border-color 0.12s;
+    font-family: var(--font);
+  }
+  .step-btn:hover { background: var(--blue-50); border-color: var(--blue-400); }
+  .step-btn:active { background: var(--blue-100); }
+
+  .num-input {
+    flex: 1;
+    height: 28px;
+    border: 1.5px solid var(--blue-200);
+    border-radius: 6px;
+    padding: 0 8px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--blue-900);
+    text-align: center;
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.12s;
+  }
+  .num-input:focus { border-color: var(--blue-400); }
+
+  /* Range slider */
+  .range-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .range-min, .range-max {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray-300);
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .range-max { text-align: right; }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--gray-100);
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    border: 2px solid var(--white);
+    box-shadow: 0 1px 4px rgba(4,44,83,0.25);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  input[type="range"]:hover::-webkit-slider-thumb { background: var(--blue-800); }
+  input[type="range"]::-moz-range-thumb {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    border: 2px solid var(--white);
+    box-shadow: 0 1px 4px rgba(4,44,83,0.25);
+    cursor: pointer;
+  }
+
+  /* Reset button */
+  .reset-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1.5px solid var(--gray-100);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-700);
+    cursor: pointer;
+    margin-top: 4px;
+    transition: border-color 0.12s, color 0.12s;
+  }
+  .reset-btn:hover { border-color: var(--blue-200); color: var(--blue-700); }
+
+  /* RESULTS PANEL */
+  .results-panel {
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .kpi-card {
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .kpi-card.accent {
+    background: var(--blue-800);
+    border-color: var(--blue-800);
+  }
+  .kpi-card.teal {
+    background: var(--teal-50);
+    border-color: var(--teal-100);
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+    color: var(--blue-700);
+  }
+  .kpi-card.accent .kpi-label { color: var(--blue-200); }
+  .kpi-card.teal .kpi-label { color: var(--teal-600); }
+
+  .kpi-value {
+    font-size: 28px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--blue-900);
+    line-height: 1;
+  }
+  .kpi-card.accent .kpi-value { color: var(--white); }
+  .kpi-card.teal .kpi-value { color: var(--teal-600); }
+
+  .kpi-unit {
+    font-size: 11px;
+    color: var(--blue-700);
+    margin-top: 4px;
+  }
+  .kpi-card.accent .kpi-unit { color: var(--blue-200); }
+  .kpi-card.teal .kpi-unit { color: var(--teal-600); }
+
+  .kpi-sub {
+    font-size: 11.5px;
+    color: var(--blue-200);
+    margin-top: 2px;
+    font-family: var(--mono);
+  }
+
+  .kpi-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  /* CHART */
+  .chart-wrap {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 10px;
+    padding: 16px 14px 12px;
+    margin-top: 12px;
+  }
+  .chart-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+  svg.cf-chart { width: 100%; height: 160px; display: block; overflow: visible; }
+
+  /* DELTA BADGE */
+  .delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-family: var(--mono);
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  .delta.pos { background: var(--teal-50); color: var(--teal-600); }
+  .delta.neg { background: var(--red-50); color: var(--red-600); }
+  .delta.neu { background: var(--gray-50); color: var(--gray-700); }
+
+  /* NOTES */
+  .notes {
+    background: var(--gray-50);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 32px;
+    font-size: 12.5px;
+    color: var(--gray-700);
+    line-height: 1.65;
+  }
+  .notes-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-700);
+    margin-bottom: 8px;
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    border-top: 1px solid var(--gray-100);
+    padding: 16px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--gray-700);
+  }
+  .doc-footer span { font-weight: 500; color: var(--blue-700); }
+
+  @media (max-width: 700px) {
+    .doc-header, .doc-body { padding-left: 24px; padding-right: 24px; }
+    .calc-layout { grid-template-columns: 1fr; }
+    .results-panel { position: static; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .doc-footer { flex-direction: column; gap: 6px; text-align: center; }
+  }
 </style>
 </head>
 <body>
@@ -792,6 +1151,10 @@
       <button class="nav-tab active" data-tab="cover" onclick="showTab('cover', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
         Обзор
+      </button>
+      <button class="nav-tab" data-tab="calc" onclick="showTab('calc', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Калькулятор
       </button>
       <button class="nav-tab" data-tab="solar" onclick="showTab('solar', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -999,6 +1362,541 @@
     </div>
   </div>
 </div>
+
+<!-- ============================================================
+     TAB: КАЛЬКУЛЯТОР
+============================================================ -->
+<div id="panel-calc" class="tab-panel">
+  <div class="tab-content-wrap">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="header-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      Интерактивный калькулятор · Сценарный анализ
+    </div>
+    <h1>Калькулятор сценариев СЭС</h1>
+    <p class="subtitle">Промышленная кровля &nbsp;·&nbsp; Бургас, Болгария &nbsp;·&nbsp; Мгновенный пересчёт при изменении параметров</p>
+    <div class="meta-pills">
+      <div class="meta-pill">Горизонт: <strong>25 лет</strong></div>
+      <div class="meta-pill">Метод: <strong>DCF · equity</strong></div>
+      <div class="meta-pill">Налог: <strong>10% (Болгария)</strong></div>
+      <div class="meta-pill">Деградация: <strong>0,4%/год</strong></div>
+    </div>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- INSTRUCTION -->
+    <div class="instruction">
+      <div class="instruction-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        Что это и для чего
+      </div>
+      <p>
+        Калькулятор позволяет мгновенно оценить, как изменятся ключевые показатели проекта (<strong>NPV, IRR, срок окупаемости</strong>) при изменении исходных допущений. Это инструмент для анализа чувствительности: например, что произойдёт с окупаемостью, если тариф на электроэнергию окажется ниже прогнозного, или если CAPEX превысит базовый сценарий.
+      </p>
+      <p style="margin-top:8px;">
+        Задайте значение вручную в числовом поле или используйте кнопки <strong>−&nbsp;/&nbsp;+</strong> для пошагового изменения и ползунок для быстрого перебора диапазона. Все результаты пересчитываются <strong>немедленно</strong> при любом изменении.
+      </p>
+    </div>
+
+    <!-- MAIN LAYOUT -->
+    <div class="calc-layout">
+
+      <!-- LEFT: CONTROLS -->
+      <div class="controls-panel">
+
+        <div class="section-label">Тарифы и экономика</div>
+
+        <!-- Тариф -->
+        <div class="control-row">
+          <div class="control-header">
+            <span class="control-name">Тариф на электроэнергию</span>
+            <span class="control-unit">€/кВт·ч</span>
+          </div>
+          <div class="input-row">
+            <button class="step-btn" onclick="step('tariff', -0.005)">−</button>
+            <input class="num-input" id="tariff-val" type="number" min="0.08" max="0.20" step="0.005" value="0.130"
+              oninput="syncFromInput('tariff')" onchange="syncFromInput('tariff')">
+            <button class="step-btn" onclick="step('tariff', +0.005)">+</button>
+          </div>
+          <div class="range-wrap">
+            <span class="range-min">0,08</span>
+            <input type="range" id="tariff-range" min="0.08" max="0.20" step="0.005" value="0.130"
+              oninput="syncFromRange('tariff')">
+            <span class="range-max">0,20</span>
+          </div>
+        </div>
+
+        <!-- Рост тарифа -->
+        <div class="control-row">
+          <div class="control-header">
+            <span class="control-name">Ежегодный рост тарифа</span>
+            <span class="control-unit">% в год</span>
+          </div>
+          <div class="input-row">
+            <button class="step-btn" onclick="step('growth', -0.5)">−</button>
+            <input class="num-input" id="growth-val" type="number" min="0" max="5" step="0.5" value="2.5"
+              oninput="syncFromInput('growth')" onchange="syncFromInput('growth')">
+            <button class="step-btn" onclick="step('growth', +0.5)">+</button>
+          </div>
+          <div class="range-wrap">
+            <span class="range-min">0%</span>
+            <input type="range" id="growth-range" min="0" max="5" step="0.5" value="2.5"
+              oninput="syncFromRange('growth')">
+            <span class="range-max">5%</span>
+          </div>
+        </div>
+
+        <!-- Ставка дисконтирования -->
+        <div class="control-row">
+          <div class="control-header">
+            <span class="control-name">Ставка дисконтирования</span>
+            <span class="control-unit">% (equity)</span>
+          </div>
+          <div class="input-row">
+            <button class="step-btn" onclick="step('disc', -0.5)">−</button>
+            <input class="num-input" id="disc-val" type="number" min="4" max="15" step="0.5" value="7"
+              oninput="syncFromInput('disc')" onchange="syncFromInput('disc')">
+            <button class="step-btn" onclick="step('disc', +0.5)">+</button>
+          </div>
+          <div class="range-wrap">
+            <span class="range-min">4%</span>
+            <input type="range" id="disc-range" min="4" max="15" step="0.5" value="7"
+              oninput="syncFromRange('disc')">
+            <span class="range-max">15%</span>
+          </div>
+        </div>
+
+        <!-- Доля самопотребления -->
+        <div class="control-row">
+          <div class="control-header">
+            <span class="control-name">Доля самопотребления</span>
+            <span class="control-unit">%</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--gray-700);margin-bottom:8px;line-height:1.5;">
+            При нагрузке завода 5,7 МВт и пиковой мощности СЭС 4,9 МВт AC базовое значение — <strong>100%</strong>. Снизьте, если возможны технологические остановки в дневное время.
+          </div>
+          <div class="input-row">
+            <button class="step-btn" onclick="step('selfc', -5)">−</button>
+            <input class="num-input" id="selfc-val" type="number" min="70" max="100" step="5" value="100"
+              oninput="syncFromInput('selfc')" onchange="syncFromInput('selfc')">
+            <button class="step-btn" onclick="step('selfc', +5)">+</button>
+          </div>
+          <div class="range-wrap">
+            <span class="range-min">70%</span>
+            <input type="range" id="selfc-range" min="70" max="100" step="5" value="100"
+              oninput="syncFromRange('selfc')">
+            <span class="range-max">100%</span>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-top:8px;">Капитальные затраты</div>
+
+        <!-- CAPEX -->
+        <div class="control-row">
+          <div class="control-header">
+            <span class="control-name">CAPEX</span>
+            <span class="control-unit">К€ (тыс. евро)</span>
+          </div>
+          <div class="input-row">
+            <button class="step-btn" onclick="step('capex', -50)">−</button>
+            <input class="num-input" id="capex-val" type="number" min="2700" max="4700" step="50" value="4050"
+              oninput="syncFromInput('capex')" onchange="syncFromInput('capex')">
+            <button class="step-btn" onclick="step('capex', +50)">+</button>
+          </div>
+          <div class="range-wrap">
+            <span class="range-min">2 700</span>
+            <input type="range" id="capex-range" min="2700" max="4700" step="50" value="4050"
+              oninput="syncFromRange('capex')">
+            <span class="range-max">4 700</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+            <button onclick="setCapex(3800)" style="font-family:var(--font);font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid var(--teal-100);background:var(--teal-50);color:var(--teal-600);cursor:pointer;">Оптим. 3 800</button>
+            <button onclick="setCapex(4050)" style="font-family:var(--font);font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid var(--blue-100);background:var(--blue-50);color:var(--blue-700);cursor:pointer;">Базовый 4 050</button>
+            <button onclick="setCapex(4300)" style="font-family:var(--font);font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid var(--amber-100);background:var(--amber-50);color:var(--amber-600);cursor:pointer;">Консерв. 4 300</button>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-top:8px;">Проект</div>
+
+        <!-- Мощность DC -->
+        <div class="control-row">
+          <div class="control-header">
+            <span class="control-name">Установленная мощность DC</span>
+            <span class="control-unit">кВт·п</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--gray-700);margin-bottom:8px;line-height:1.5;">
+            Соответствует площади кровли: 5 400 кВт = 5,5 га при коэф. использования 55%.
+          </div>
+          <div class="input-row">
+            <button class="step-btn" onclick="step('power', -100)">−</button>
+            <input class="num-input" id="power-val" type="number" min="3000" max="8000" step="100" value="5400"
+              oninput="syncFromInput('power')" onchange="syncFromInput('power')">
+            <button class="step-btn" onclick="step('power', +100)">+</button>
+          </div>
+          <div style="font-size:11.5px;color:var(--gray-700);margin-top:8px;">
+            Площадь кровли: <strong id="area-display">5,5 га</strong> &nbsp;·&nbsp; Выработка г.1: <strong id="gen-display">6 900 МВт·ч</strong>
+          </div>
+        </div>
+
+        <!-- Reset -->
+        <div style="display:flex;justify-content:flex-end;">
+          <button class="reset-btn" onclick="resetAll()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/>
+            </svg>
+            Сбросить к базовым значениям
+          </button>
+        </div>
+
+      </div><!-- /controls-panel -->
+
+      <!-- RIGHT: RESULTS -->
+      <div class="results-panel">
+
+        <div class="section-label">Результаты</div>
+
+        <div class="kpi-card accent">
+          <div class="kpi-label">NPV (дисконт. стоимость)</div>
+          <div class="kpi-value" id="r-npv">—</div>
+          <div class="kpi-unit">К€ · чистая приведённая стоимость</div>
+          <div id="r-npv-delta" class="delta neu" style="display:none;"></div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-card accent">
+            <div class="kpi-label">IRR</div>
+            <div class="kpi-value" id="r-irr">—</div>
+            <div class="kpi-unit">внутр. норма доходности</div>
+          </div>
+          <div class="kpi-card teal">
+            <div class="kpi-label">Окупаемость</div>
+            <div class="kpi-value" id="r-pb">—</div>
+            <div class="kpi-unit">лет · простой</div>
+          </div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-card">
+            <div class="kpi-label">Выручка 25 лет</div>
+            <div class="kpi-value" id="r-rev" style="font-size:20px;">—</div>
+            <div class="kpi-unit">М€ суммарно</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Генерация 25 лет</div>
+            <div class="kpi-value" id="r-gen" style="font-size:20px;">—</div>
+            <div class="kpi-unit">ГВт·ч суммарно</div>
+          </div>
+        </div>
+
+        <!-- CHART -->
+        <div class="chart-wrap">
+          <div class="chart-title">Кумулятивный NCF, К€</div>
+          <svg class="cf-chart" id="cf-svg" viewBox="0 0 400 160"></svg>
+        </div>
+
+        <!-- Параметры текущего расчёта -->
+        <div style="background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:14px 16px;font-size:12px;color:var(--gray-700);">
+          <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;color:var(--gray-700);">Текущие параметры расчёта</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 12px;">
+            <div>Тариф г.1: <strong id="p-tariff" style="font-family:var(--mono);">—</strong></div>
+            <div>Рост тарифа: <strong id="p-growth" style="font-family:var(--mono);">—</strong></div>
+            <div>Дисконт: <strong id="p-disc" style="font-family:var(--mono);">—</strong></div>
+            <div>CAPEX: <strong id="p-capex" style="font-family:var(--mono);">—</strong></div>
+            <div>Самопотребл.: <strong id="p-selfc" style="font-family:var(--mono);">—</strong></div>
+            <div>Мощность DC: <strong id="p-power" style="font-family:var(--mono);">—</strong></div>
+          </div>
+        </div>
+
+      </div><!-- /results-panel -->
+
+    </div><!-- /calc-layout -->
+
+    <!-- NOTES -->
+    <div class="notes">
+      <div class="notes-title">Фиксированные параметры модели</div>
+      Деградация панелей — 0,4%/год · Инфляция OPEX — 2,5%/год · Базовый OPEX г.1 — 103 К€/год · Замена инверторов: г.12 — 165 К€, г.23 — 130 К€ · Налог на прибыль — 10% · Амортизация — линейная, 25 лет · Инсоляция PVGIS — 1 580 кВт·ч/м²/год · PR — 0,80 · Финансирование — 100% equity.
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <div class="doc-footer">
+    <div>Калькулятор: <span>DCF · equity · 25 лет</span></div>
+    <div>СЭС Бургас &nbsp;·&nbsp; Предварительный расчёт 2025</div>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+// ─── FIXED PARAMETERS ─────────────────────────────────────────
+const FIXED = {
+  degrad:    0.004,
+  opex1:     103,      // К€/год
+  opex_inf:  0.025,
+  inv1:      { yr: 12, cost: 165 },
+  inv2:      { yr: 23, cost: 130 },
+  tax:       0.10,
+  years:     25,
+  insolation: 1580,   // кВт·ч/м²/год
+  pr:         0.80,
+  // power → gen: power_dc * insolation * pr / 1000 МВт·ч
+};
+
+// ─── DEFAULTS ─────────────────────────────────────────────────
+const DEFAULTS = {
+  tariff: 0.130,
+  growth: 2.5,
+  disc:   7.0,
+  selfc:  100,
+  capex:  4050,
+  power:  5400,
+};
+
+// Current values
+const V = { ...DEFAULTS };
+
+// Base NPV (for delta)
+let baseNPV = null;
+
+// ─── CONTROLS CONFIG ──────────────────────────────────────────
+const CONTROLS = {
+  tariff: { min: 0.08,  max: 0.20,  step: 0.005 },
+  growth: { min: 0,     max: 5,     step: 0.5   },
+  disc:   { min: 4,     max: 15,    step: 0.5   },
+  selfc:  { min: 70,    max: 100,   step: 5     },
+  capex:  { min: 2700,  max: 4700,  step: 50    },
+  power:  { min: 3000,  max: 8000,  step: 100   },
+};
+
+// ─── SYNC FUNCTIONS ───────────────────────────────────────────
+function syncFromRange(key) {
+  const r = document.getElementById(key + '-range');
+  const v = document.getElementById(key + '-val');
+  V[key] = parseFloat(r.value);
+  v.value = V[key];
+  recalc();
+}
+
+function syncFromInput(key) {
+  const r = document.getElementById(key + '-range');
+  const v = document.getElementById(key + '-val');
+  let val = parseFloat(v.value);
+  const cfg = CONTROLS[key];
+  if (isNaN(val)) return;
+  val = Math.max(cfg.min, Math.min(cfg.max, val));
+  V[key] = val;
+  if (r) r.value = val;
+  recalc();
+}
+
+function step(key, delta) {
+  const cfg = CONTROLS[key];
+  let val = V[key] + delta;
+  val = Math.round(val / cfg.step) * cfg.step;
+  val = Math.max(cfg.min, Math.min(cfg.max, val));
+  val = parseFloat(val.toFixed(10));
+  V[key] = val;
+  document.getElementById(key + '-val').value = val;
+  const r = document.getElementById(key + '-range');
+  if (r) r.value = val;
+  recalc();
+}
+
+function setCapex(val) {
+  V.capex = val;
+  document.getElementById('capex-val').value = val;
+  document.getElementById('capex-range').value = val;
+  recalc();
+}
+
+function resetAll() {
+  Object.assign(V, DEFAULTS);
+  Object.keys(DEFAULTS).forEach(k => {
+    const vi = document.getElementById(k + '-val');
+    const ri = document.getElementById(k + '-range');
+    if (vi) vi.value = DEFAULTS[k];
+    if (ri) ri.value = DEFAULTS[k];
+  });
+  recalc();
+}
+
+// ─── CALCULATION ENGINE ───────────────────────────────────────
+function calcGen(power_dc) {
+  // power_dc in кВт·п → МВт·ч/год
+  return power_dc * FIXED.insolation * FIXED.pr / 1000;
+}
+
+function buildCF(params) {
+  const { tariff, growth, disc, selfc, capex, power } = params;
+  const gen1 = calcGen(power) * (selfc / 100);
+  const deprAnnual = capex / FIXED.years;
+  const rows = [];
+
+  for (let y = 1; y <= FIXED.years; y++) {
+    const gen_mwh  = gen1 * Math.pow(1 - FIXED.degrad, y - 1);
+    const t        = tariff * Math.pow(1 + growth / 100, y - 1);
+    const revenue  = gen_mwh * 1000 * t / 1000; // К€
+
+    let opex = FIXED.opex1 * Math.pow(1 + FIXED.opex_inf, y - 1);
+    if (y === FIXED.inv1.yr) opex += FIXED.inv1.cost;
+    if (y === FIXED.inv2.yr) opex += FIXED.inv2.cost;
+
+    const ebit = revenue - opex - deprAnnual;
+    const tax  = ebit > 0 ? ebit * FIXED.tax : 0;
+    const ncf  = revenue - opex - tax;
+    rows.push({ y, gen_mwh, revenue, opex, tax, ncf });
+  }
+
+  let cum = -capex;
+  rows.forEach(r => { cum += r.ncf; r.cum = cum; });
+
+  let npv = -capex;
+  rows.forEach((r, i) => { npv += r.ncf / Math.pow(1 + disc / 100, i + 1); });
+
+  // IRR (Newton-Raphson)
+  function irr(flows) {
+    let rate = 0.12;
+    for (let i = 0; i < 300; i++) {
+      let v = 0, dv = 0;
+      flows.forEach((f, j) => {
+        v  += f / Math.pow(1 + rate, j);
+        dv -= j * f / Math.pow(1 + rate, j + 1);
+      });
+      if (Math.abs(dv) < 1e-12) break;
+      const s = v / dv;
+      rate -= s;
+      if (Math.abs(s) < 1e-10) break;
+    }
+    return rate;
+  }
+  const irrVal = irr([-capex, ...rows.map(r => r.ncf)]);
+
+  let pb = null;
+  rows.forEach(r => { if (pb === null && r.cum >= 0) pb = r.y; });
+
+  const totalRev = rows.reduce((s, r) => s + r.revenue, 0);
+  const totalGen = rows.reduce((s, r) => s + r.gen_mwh, 0);
+
+  return { rows, npv, irrVal, pb, totalRev, totalGen, gen1 };
+}
+
+// ─── FORMAT ───────────────────────────────────────────────────
+function f(v, d = 0) {
+  return v.toLocaleString('ru-RU', { minimumFractionDigits: d, maximumFractionDigits: d });
+}
+
+// ─── CHART ────────────────────────────────────────────────────
+function renderChart(rows, capex) {
+  const svg = document.getElementById('cf-svg');
+  const W = 400, H = 160, pL = 46, pR = 10, pT = 12, pB = 24;
+  const cw = W - pL - pR, ch = H - pT - pB;
+
+  const cumVals = [-capex, ...rows.map(r => r.cum)];
+  const minV = Math.min(...cumVals);
+  const maxV = Math.max(...cumVals);
+  const rng  = maxV - minV || 1;
+
+  const sx = i => pL + (i / (cumVals.length - 1)) * cw;
+  const sy = v => pT + ch - ((v - minV) / rng) * ch;
+  const zY  = sy(0);
+
+  let out = '';
+
+  // grid lines
+  [0, 1, 2, 3].forEach(i => {
+    const v = minV + rng * i / 3;
+    const y = sy(v);
+    out += `<line x1="${pL}" y1="${y}" x2="${W - pR}" y2="${y}" stroke="#D3D1C7" stroke-width="0.7"/>`;
+    out += `<text x="${pL - 4}" y="${y + 3.5}" text-anchor="end" font-size="8" fill="#5F5E5A">${f(v / 1000, 1)}М</text>`;
+  });
+
+  // zero line
+  out += `<line x1="${pL}" y1="${zY}" x2="${W - pR}" y2="${zY}" stroke="#185FA5" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>`;
+
+  // fills
+  const negPath = cumVals.map((v, i) => `${i === 0 ? 'M' : 'L'}${sx(i)},${sy(Math.min(v, 0))}`).join(' ');
+  out += `<path d="${negPath} L${sx(cumVals.length - 1)},${zY} L${sx(0)},${zY} Z" fill="#FEE2E2" opacity="0.65"/>`;
+
+  const posPts = cumVals.map((v, i) => `${sx(i)},${sy(Math.max(v, 0))}`).join(' ');
+  out += `<polygon points="${sx(0)},${zY} ${posPts} ${sx(cumVals.length - 1)},${zY}" fill="#D1FAE5" opacity="0.65"/>`;
+
+  // line
+  const pts = cumVals.map((v, i) => `${sx(i)},${sy(v)}`).join(' ');
+  out += `<polyline points="${pts}" fill="none" stroke="#185FA5" stroke-width="2" stroke-linejoin="round"/>`;
+
+  // payback dot
+  const pbIdx = cumVals.findIndex((v, i) => i > 0 && v >= 0);
+  if (pbIdx > 0) {
+    out += `<circle cx="${sx(pbIdx)}" cy="${sy(cumVals[pbIdx])}" r="4" fill="#0F6E56" stroke="white" stroke-width="1.5"/>`;
+    out += `<line x1="${sx(pbIdx)}" y1="${pT}" x2="${sx(pbIdx)}" y2="${H - pB}" stroke="#0F6E56" stroke-width="1" stroke-dasharray="3,3" opacity="0.7"/>`;
+  }
+
+  // year labels
+  [0, 5, 10, 15, 20, 25].forEach(y => {
+    if (y < cumVals.length)
+      out += `<text x="${sx(y)}" y="${H - pB + 13}" text-anchor="middle" font-size="8" fill="#5F5E5A">${y === 0 ? 'C' : 'Г' + y}</text>`;
+  });
+
+  svg.innerHTML = out;
+}
+
+// ─── MAIN RECALC ──────────────────────────────────────────────
+function recalc() {
+  const cf = buildCF(V);
+
+  // KPIs
+  document.getElementById('r-npv').textContent = f(cf.npv, 0) + ' К€';
+  document.getElementById('r-irr').textContent = f(cf.irrVal * 100, 1) + '%';
+  document.getElementById('r-pb').textContent  = cf.pb ? cf.pb + ' лет' : '>25';
+  document.getElementById('r-rev').textContent = f(cf.totalRev / 1000, 2) + ' М€';
+  document.getElementById('r-gen').textContent = f(cf.totalGen / 1000, 1) + ' ГВт·ч';
+
+  // Delta vs base
+  if (baseNPV !== null) {
+    const delta = cf.npv - baseNPV;
+    const el = document.getElementById('r-npv-delta');
+    if (Math.abs(delta) > 0.5) {
+      el.style.display = 'inline-flex';
+      el.className = 'delta ' + (delta > 0 ? 'pos' : 'neg');
+      el.textContent = (delta > 0 ? '▲ +' : '▼ ') + f(delta, 0) + ' К€ vs базовый';
+    } else {
+      el.style.display = 'none';
+    }
+  }
+
+  // Dynamic labels
+  const area = (V.power / (0.55 * 0.85 * 210 * 10000)).toFixed(2); // га
+  document.getElementById('area-display').textContent = area + ' га';
+  document.getElementById('gen-display').textContent  = f(calcGen(V.power), 0) + ' МВт·ч';
+
+  // Param summary
+  document.getElementById('p-tariff').textContent = V.tariff.toFixed(3) + ' €/кВт·ч';
+  document.getElementById('p-growth').textContent = V.growth.toFixed(1) + '%/год';
+  document.getElementById('p-disc').textContent   = V.disc.toFixed(1) + '%';
+  document.getElementById('p-capex').textContent  = f(V.capex, 0) + ' К€';
+  document.getElementById('p-selfc').textContent  = V.selfc + '%';
+  document.getElementById('p-power').textContent  = f(V.power, 0) + ' кВт';
+
+  // Chart
+  renderChart(cf.rows, V.capex);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────
+// Calculate base NPV once
+baseNPV = buildCF(DEFAULTS).npv;
+recalc();
+</script>
+
+  </div>
+</div>
+
 
 <!-- ============================================================
      TAB: ВЫРАБОТКА
@@ -2136,7 +3034,7 @@
       </div>
       <div class="note-item">
         <div class="note-dot">2</div>
-        <span>100% самопотребление предполагает, что генерация СЭС полностью поглощается нагрузкой объекта. Если производство работает не круглосуточно, реальная доля самопотребления может быть ниже — необходим профиль нагрузки.</span>
+        <span><strong>100% самопотребление обосновано следующим образом:</strong> пиковая мощность СЭС составляет <strong>4,9 МВт AC</strong>, тогда как базовая нагрузка завода флоат-стекла — <strong>5,7 МВт</strong> (непрерывный технологический цикл 24/7). Поскольку мощность СЭС в любой момент меньше нагрузки завода, вся генерируемая электроэнергия гарантированно потребляется на месте, не поступая во внешнюю сеть. Допущение теряет силу при технологических остановках или плановом снижении нагрузки в дневное время — в этом случае используйте Калькулятор сценариев для оценки влияния пониженной доли самопотребления.</span>
       </div>
       <div class="note-item">
         <div class="note-dot">3</div>
