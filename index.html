@@ -836,28 +836,28 @@
       <div class="cover-body">
         <div class="cover-section-title">Разделы расчёта</div>
         <div class="cover-toc">
-          <div class="cover-toc-item" onclick="showTab('solar', document.querySelector('[onclick=\'showTab(\'solar\', this)\']'))">
+          <div class="cover-toc-item" onclick="switchToTab('solar')">
             <div class="cover-toc-num">1</div>
             <div class="cover-toc-text">
               <div class="cover-toc-label">Оценка выработки</div>
               <div class="cover-toc-desc">Солнечный ресурс Бургаса, расчёт установленной мощности, годовой выработки и коэффициента использования.</div>
             </div>
           </div>
-          <div class="cover-toc-item" onclick="showTab('capex', document.querySelector('[onclick=\'showTab(\'capex\', this)\']'))">
+          <div class="cover-toc-item" onclick="switchToTab('capex')">
             <div class="cover-toc-num">2</div>
             <div class="cover-toc-text">
               <div class="cover-toc-label">CAPEX</div>
               <div class="cover-toc-desc">Капитальные затраты по EPC-методологии: оборудование, СМР, косвенные затраты. Сценарный анализ.</div>
             </div>
           </div>
-          <div class="cover-toc-item" onclick="showTab('opex', document.querySelector('[onclick=\'showTab(\'opex\', this)\']'))">
+          <div class="cover-toc-item" onclick="switchToTab('opex')">
             <div class="cover-toc-num">3</div>
             <div class="cover-toc-text">
               <div class="cover-toc-label">OPEX</div>
               <div class="cover-toc-desc">Операционные расходы: техобслуживание, страхование, сетевые платежи, замена инверторов.</div>
             </div>
           </div>
-          <div class="cover-toc-item" onclick="showTab('fin', document.querySelector('[onclick=\'showTab(\'fin\', this)\']'))">
+          <div class="cover-toc-item" onclick="switchToTab('fin')">
             <div class="cover-toc-num">4</div>
             <div class="cover-toc-text">
               <div class="cover-toc-label">Финансовая модель</div>
@@ -866,18 +866,131 @@
           </div>
         </div>
 
-        <div class="cover-section-title">Допущения и примечания</div>
-        <div class="placeholder-block">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14,2 14,8 20,8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10,9 9,9 8,9"/>
-          </svg>
-          <h3>Раздел в разработке</h3>
-          <p>Здесь будут размещены общие допущения и примечания,<br>принятые при выполнении расчётов по всем разделам.</p>
+        <!-- ─── INTRODUCTION ─────────────────────────────── -->
+        <div class="cover-section-title" style="margin-top:40px;">Введение · Контекст проекта</div>
+
+        <!-- Context block -->
+        <div style="background:var(--blue-50);border:1px solid var(--blue-100);border-radius:12px;padding:22px 24px;margin-bottom:20px;">
+          <div style="font-size:13px;font-weight:600;color:var(--blue-900);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+            Объект и цель
+          </div>
+          <p style="font-size:13.5px;color:var(--gray-700);line-height:1.75;">
+            Проект рассматривает строительство кровельной солнечной электростанции (СЭС) на производственном здании завода флоат-стекла в г. Бургас, Болгария. Площадь кровли — <strong>5,5 га (55 000 м²)</strong>. Цель — частичное покрытие собственного энергопотребления завода и снижение эксплуатационных расходов за счёт замещения покупной электроэнергии.
+          </p>
         </div>
+
+        <!-- Energy context -->
+        <div style="background:var(--amber-50);border:1px solid var(--amber-100);border-radius:12px;padding:22px 24px;margin-bottom:20px;">
+          <div style="font-size:13px;font-weight:600;color:var(--amber-600);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#854F0B" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Энергобаланс завода флоат-стекла
+          </div>
+          <p style="font-size:13.5px;color:var(--gray-700);line-height:1.75;margin-bottom:14px;">
+            Производство флоат-стекла характеризуется <strong>непрерывным технологическим циклом 24/7</strong>: стекловаренная печь требует стабильного энергоснабжения без перебоев. Расчётная мощность потребления — <strong>~5,7 МВт</strong>, годовое потребление — <strong>~49,9 ГВт·ч/год</strong>.
+          </p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+            <div style="background:white;border-radius:8px;padding:12px;text-align:center;border:1px solid var(--amber-100);">
+              <div style="font-size:19px;font-weight:600;color:var(--amber-600);font-family:'JetBrains Mono',monospace;">5,7 МВт</div>
+              <div style="font-size:11px;color:var(--gray-700);margin-top:3px;">Мощность потребления</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:12px;text-align:center;border:1px solid var(--amber-100);">
+              <div style="font-size:19px;font-weight:600;color:var(--amber-600);font-family:'JetBrains Mono',monospace;">~50 ГВт·ч</div>
+              <div style="font-size:11px;color:var(--gray-700);margin-top:3px;">Годовое потребление</div>
+            </div>
+            <div style="background:white;border-radius:8px;padding:12px;text-align:center;border:1px solid var(--amber-100);">
+              <div style="font-size:19px;font-weight:600;color:var(--blue-800);font-family:'JetBrains Mono',monospace;">13–14%</div>
+              <div style="font-size:11px;color:var(--gray-700);margin-top:3px;">Покрытие СЭС от потребления</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid-tied scheme -->
+        <div style="background:var(--teal-50);border:1px solid var(--teal-100);border-radius:12px;padding:22px 24px;margin-bottom:20px;">
+          <div style="font-size:13px;font-weight:600;color:var(--teal-600);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Схема энергоснабжения: Grid-Tied
+          </div>
+          <p style="font-size:13.5px;color:var(--gray-700);line-height:1.75;">
+            Принята схема параллельной работы СЭС с внешней электросетью (<em>Grid-Tied System</em>). СЭС не является автономным источником питания: в дневные часы она частично замещает покупную электроэнергию, в ночное время завод полностью питается от сети. Системы накопления энергии (BESS) в базовом варианте не предусмотрены — их применение в масштабе ночной нагрузки (~60–70 МВт·ч) экономически нецелесообразно на данном этапе.
+          </p>
+        </div>
+
+        <!-- Assumptions -->
+        <div class="cover-section-title" style="margin-top:36px;">Ключевые допущения расчётов</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+          <!-- Energy assumptions -->
+          <div style="background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:600;color:var(--blue-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-100);">Выработка СЭС</div>
+            <div style="font-size:12.5px;color:var(--gray-700);line-height:1.7;">
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Площадь кровли</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">55 000 м²</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Коэф. использования кровли</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">55%</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Удельная мощность панелей</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">210 Вт/м²</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Инсоляция (PVGIS, TMY)</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">1 580 кВт·ч/м²/год</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Performance Ratio (PR)</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">0,80</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Деградация панелей</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">0,4% / год</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;"><span>Наклон панелей</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">~35°</span></div>
+            </div>
+          </div>
+          <!-- Financial assumptions -->
+          <div style="background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:600;color:var(--blue-700);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-100);">Финансовые</div>
+            <div style="font-size:12.5px;color:var(--gray-700);line-height:1.7;">
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Тариф на э/э (г. 1)</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">0,130 €/кВт·ч</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Рост тарифа</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">2,5% / год</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Ставка дисконтирования</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">7% (equity)</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Налог на прибыль</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">10% (Болгария)</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Горизонт расчёта</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">25 лет</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--gray-100);"><span>Схема монетизации</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">100% самопотребление</span></div>
+              <div style="display:flex;justify-content:space-between;padding:3px 0;"><span>Источник тарифа</span><span style="font-family:monospace;font-weight:500;color:var(--blue-900);">Eurostat H2 2025</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Caveats / notes -->
+        <div class="cover-section-title" style="margin-top:36px;">Примечания и ограничения расчёта</div>
+        <div style="background:var(--gray-50);border-radius:10px;padding:18px 20px;">
+          <div style="display:flex;flex-direction:column;gap:9px;">
+
+            <div style="display:flex;gap:10px;font-size:12.5px;color:var(--gray-700);line-height:1.65;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--blue-100);color:var(--blue-800);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
+              <span><strong>Предварительный характер расчёта.</strong> Класс точности ±20–30%. Точные параметры определяются после аэрофотосъёмки кровли, инструментального замера инсоляции, получения технических условий от EVN и коммерческих предложений поставщиков.</span>
+            </div>
+
+            <div style="display:flex;gap:10px;font-size:12.5px;color:var(--gray-700);line-height:1.65;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--blue-100);color:var(--blue-800);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div>
+              <span><strong>Инсоляция.</strong> Данные PVGIS (EC JRC) на основе TMY (Typical Meteorological Year) для координат Бургаса. Фактические значения могут отличаться в зависимости от конкретного расположения объекта и затенения.</span>
+            </div>
+
+            <div style="display:flex;gap:10px;font-size:12.5px;color:var(--gray-700);line-height:1.65;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--blue-100);color:var(--blue-800);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div>
+              <span><strong>100% самопотребление.</strong> Модель предполагает полное поглощение генерации нагрузкой завода. При работе не в круглосуточном режиме или при сезонных остановках реальная доля самопотребления может быть ниже — потребуется анализ почасового профиля нагрузки.</span>
+            </div>
+
+            <div style="display:flex;gap:10px;font-size:12.5px;color:var(--gray-700);line-height:1.65;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--blue-100);color:var(--blue-800);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div>
+              <span><strong>Несущая способность кровли.</strong> Возможное усиление несущих конструкций не включено в базовый CAPEX. Определяется по результатам конструктивного обследования.</span>
+            </div>
+
+            <div style="display:flex;gap:10px;font-size:12.5px;color:var(--gray-700);line-height:1.65;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--blue-100);color:var(--blue-800);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">5</div>
+              <span><strong>Подключение к сети.</strong> Стоимость и условия технологического присоединения определяются техническими условиями EVN Юг и являются наиболее неопределённой статьёй CAPEX (±150–200 тыс. €).</span>
+            </div>
+
+            <div style="display:flex;gap:10px;font-size:12.5px;color:var(--gray-700);line-height:1.65;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--blue-100);color:var(--blue-800);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">6</div>
+              <span><strong>НДС и субсидии.</strong> Все цены указаны без НДС (20%, возвратный для юридических лиц). Возможный грант НПВУ 30–45% от CAPEX в расчёт не включён — требует отдельной проработки.</span>
+            </div>
+
+            <div style="display:flex;gap:10px;font-size:12.5px;color:var(--gray-700);line-height:1.65;">
+              <div style="width:20px;height:20px;border-radius:50%;background:var(--blue-100);color:var(--blue-800);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">7</div>
+              <span><strong>Финансирование.</strong> Базовая модель — 100% equity. При добавлении проектного кредита WACC снизится, NPV возрастёт. Расчёт с долговым финансированием будет выполнен отдельно.</span>
+            </div>
+
+          </div>
+        </div>
+
       </div>
       <div class="cover-footer">
         <div>Проект: <span>СЭС на промышленной кровле · Бургас, Болгария</span></div>
