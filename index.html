@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ТЭО СЭС Бургас — Интегрированный отчет</title>
-<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>СЭС Бургас — Кровельная солнечная электростанция 5,4 МВт</title>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ─── ОБЩИЕ СТИЛИ ИНТЕРФЕЙСА ─────────────────── */
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
     --blue-900: #042C53;
     --blue-800: #0C447C;
     --blue-700: #185FA5;
-    --blue-600: #1a6cb9;
+    --blue-600: #185FA5;
     --blue-400: #378ADD;
     --blue-200: #85B7EB;
     --blue-100: #B5D4F4;
@@ -35,315 +36,2021 @@
     --font: 'Geologica', sans-serif;
     --mono: 'JetBrains Mono', monospace;
   }
+
   body {
     font-family: var(--font);
-    background: #f0f3f7;
+    background: #f4f6f9;
     color: var(--gray-900);
-    padding: 20px;
+    padding: 40px 20px 60px;
     font-size: 14px;
     line-height: 1.6;
   }
-  .main-container {
-    max-width: 1100px;
+
+  .page {
+    max-width: 900px;
     margin: 0 auto;
     background: var(--white);
     border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(4,44,83,0.08);
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(4,44,83,0.10);
+  }
+
+  /* HEADER */
+  .doc-header {
+    background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+    padding: 44px 48px 36px;
+    position: relative;
     overflow: hidden;
   }
-  
-  /* ГЛАВНОЕ МЕНЮ */
-  .main-nav {
-    display: flex;
-    background: var(--blue-900);
-    border-bottom: 3px solid var(--blue-400);
-    overflow-x: auto;
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 40px solid rgba(255,255,255,0.06);
   }
-  .nav-btn {
-    background: none;
-    border: none;
-    padding: 18px 24px;
-    color: var(--blue-200);
-    font-family: var(--font);
-    font-size: 14px;
+  .doc-header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -80px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 28px solid rgba(255,255,255,0.04);
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
     font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-    border-bottom: 4px solid transparent;
+    color: var(--blue-100);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
-  .nav-btn:hover {
-    color: var(--white);
-    background: rgba(255,255,255,0.05);
-  }
-  .nav-btn.active {
-    color: var(--white);
+  .doc-header h1 {
+    font-size: 28px;
     font-weight: 600;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .doc-header .subtitle {
+    font-size: 13px;
+    color: var(--blue-200);
+    font-weight: 300;
+    position: relative;
+  }
+  .meta-pills {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .meta-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--blue-100);
+  }
+  .meta-pill strong { color: var(--white); font-weight: 500; }
+
+  /* SCENARIO SWITCHER */
+  .scenario-bar {
+    background: var(--blue-50);
+    border-bottom: 1px solid var(--blue-100);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .scenario-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .scen-btn {
+    background: var(--white);
+    border: 1.5px solid var(--blue-100);
+    border-radius: 8px;
+    padding: 6px 18px;
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--blue-700);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .scen-btn:hover { border-color: var(--blue-400); background: var(--blue-50); }
+  .scen-btn.active {
     background: var(--blue-800);
-    border-bottom-color: var(--white);
+    border-color: var(--blue-800);
+    color: var(--white);
   }
 
-  /* КОНТЕНТ ВКЛАДОК (ОСНОВНОЙ КЛАСС ДЛЯ ПЕРЕКЛЮЧЕНИЯ) */
-  .tab-content {
-    display: none;
-    padding: 40px;
-  }
-  .tab-content.active {
-    display: block;
-  }
+  /* BODY */
+  .doc-body { padding: 0 48px 48px; }
 
-  /* ТИПОГРАФИКА И ОФОРМЛЕНИЕ */
-  .doc-header {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+  /* SECTION */
+  .section { margin-top: 44px; }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
     border-bottom: 2px solid var(--blue-50);
   }
-  .doc-header h1 { font-size: 26px; color: var(--blue-900); font-weight: 600; }
-  .doc-header .subtitle { color: var(--gray-700); font-size: 14px; margin-top: 5px; }
-  
-  .section-title {
-    display: flex; align-items: center; gap: 10px;
-    margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid var(--blue-50);
-  }
   .section-num {
-    width: 26px; height: 26px; background: var(--blue-700); color: var(--white);
-    border-radius: 6px; display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 600;
+    width: 30px; height: 30px;
+    background: var(--blue-700);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; color: var(--white);
+    flex-shrink: 0;
   }
-  .section-title h2 { font-size: 18px; color: var(--blue-900); font-weight: 600; }
+  .section-title h2 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--blue-900);
+  }
 
-  /* ТАБЛИЦЫ */
-  .table-wrap { overflow-x: auto; margin: 15px 0; border: 1px solid var(--gray-100); border-radius: 8px; }
-  table { width: 100%; border-collapse: collapse; font-size: 13.5px; text-align: left; }
-  thead th { background: var(--blue-800); color: var(--white); padding: 10px 14px; font-weight: 500; }
-  tbody td { padding: 10px 14px; border-bottom: 1px solid var(--gray-100); }
+  .section-lead {
+    font-size: 13.5px;
+    color: var(--gray-700);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  /* TABLES */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  thead tr th {
+    background: var(--blue-800);
+    color: var(--white);
+    font-weight: 500;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  thead tr th:not(:first-child) { text-align: right; }
+  tbody tr td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-900);
+    vertical-align: middle;
+  }
+  tbody tr td:not(:first-child) { text-align: right; font-family: var(--mono); font-size: 12px; }
+  tbody tr:last-child td { border-bottom: none; }
   tbody tr:nth-child(even) td { background: var(--blue-50); }
-  .val { font-family: var(--mono); font-weight: 500; text-align: right; }
-  thead th.val { text-align: right; }
+  tbody tr:nth-child(odd) td { background: var(--white); }
+  td.val { font-weight: 500; color: var(--blue-800); }
+  td.pos { font-weight: 600; color: var(--teal-600); }
+  td.neg { font-weight: 500; color: var(--red-600); }
+  td.highlight { background: var(--blue-50) !important; font-weight: 600; color: var(--blue-900); }
+  tr.result-row td {
+    background: var(--blue-800) !important;
+    color: var(--white) !important;
+    font-weight: 600;
+  }
+  tr.result-row td:not(:first-child) { color: var(--blue-100) !important; }
+  tr.section-row td {
+    background: var(--blue-50) !important;
+    color: var(--blue-700) !important;
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 14px;
+  }
+  tr.capex-row td { background: var(--red-50) !important; }
+  tr.capex-row td:not(:first-child) { color: var(--red-600) !important; }
+  tr.ncf-row td { background: var(--teal-50) !important; }
+  tr.ncf-row td:not(:first-child) { color: var(--teal-600) !important; font-weight: 700; }
+  tr.cum-row td:not(:first-child) { font-weight: 600; }
 
-  /* КАРТОЧКИ KPI */
-  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 20px 0; }
-  .kpi-card { background: var(--blue-50); border: 1px solid var(--blue-100); border-radius: 8px; padding: 16px; text-align: center; }
-  .kpi-card.accent { background: var(--blue-800); border-color: var(--blue-800); color: var(--white); }
+  /* FORMULA BOX */
+  .formula-block {
+    background: var(--gray-50);
+    border-left: 3px solid var(--blue-400);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--blue-900);
+    line-height: 1.6;
+  }
+  .formula-label {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  /* SUBSECTION */
+  .subsection { margin: 22px 0 8px; }
+  .subsection h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue-700);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .subsection h3::before {
+    content: '';
+    display: block;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--blue-400);
+    flex-shrink: 0;
+  }
+
+  /* KPI CARDS */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .kpi-card {
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .kpi-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--blue-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .kpi-value {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--blue-900);
+    line-height: 1.1;
+    font-family: var(--mono);
+  }
+  .kpi-unit {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--blue-700);
+    margin-top: 3px;
+  }
+  .kpi-card.accent {
+    background: var(--blue-800);
+    border-color: var(--blue-800);
+  }
   .kpi-card.accent .kpi-label { color: var(--blue-200); }
   .kpi-card.accent .kpi-value { color: var(--white); }
-  .kpi-card.teal { background: var(--teal-50); border-color: var(--teal-100); }
+  .kpi-card.accent .kpi-unit { color: var(--blue-200); }
+  .kpi-card.teal {
+    background: var(--teal-50);
+    border-color: var(--teal-100);
+  }
+  .kpi-card.teal .kpi-label { color: var(--teal-600); }
   .kpi-card.teal .kpi-value { color: var(--teal-600); }
-  .kpi-label { font-size: 11px; text-transform: uppercase; color: var(--blue-700); font-weight: 600; margin-bottom: 6px; }
-  .kpi-value { font-size: 22px; font-weight: 700; color: var(--blue-900); font-family: var(--mono); }
-  .kpi-unit { font-size: 11px; color: var(--gray-700); margin-top: 4px; }
-  .kpi-card.accent .kpi-unit { color: var(--blue-100); }
+  .kpi-card.teal .kpi-unit { color: var(--teal-600); }
 
-  /* ПРИМЕЧАНИЯ */
-  .notes { background: var(--gray-50); padding: 16px 20px; border-radius: 8px; margin-top: 25px; border-left: 4px solid var(--gray-300); }
-  .note-item { display: flex; gap: 8px; font-size: 12.5px; color: var(--gray-700); margin-bottom: 6px; }
-  .note-dot { background: var(--blue-100); color: var(--blue-900); width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; flex-shrink: 0; margin-top: 2px; }
-
-  /* СПЕЦИФИКА ФИНАНСОВОЙ МОДЕЛИ */
-  .scenario-bar { background: var(--blue-50); padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-  .scen-btn { background: var(--white); border: 1.5px solid var(--blue-100); border-radius: 6px; padding: 6px 14px; font-family: var(--font); font-size: 13px; font-weight: 500; color: var(--blue-700); cursor: pointer; }
-  .scen-btn.active { background: var(--blue-800); border-color: var(--blue-800); color: var(--white); }
-  .scen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 15px; }
-  .scen-card { border-radius: 8px; padding: 14px; border: 1px solid; }
-  .scen-card.opt { background: var(--teal-50); border-color: var(--teal-100); }
-  .scen-card.base { background: var(--blue-50); border-color: var(--blue-100); }
+  /* SCENARIO CARDS */
+  .scen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .scen-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid;
+  }
+  .scen-card.opt  { background: var(--teal-50);  border-color: var(--teal-100); }
+  .scen-card.base { background: var(--blue-50);  border-color: var(--blue-100); }
   .scen-card.cons { background: var(--amber-50); border-color: var(--amber-100); }
-  .scen-name { font-size: 11px; font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
-  .scen-capex { font-size: 20px; font-weight: 700; font-family: var(--mono); }
-  .scen-detail { font-size: 12px; color: var(--gray-700); margin-top: 6px; line-height: 1.5; }
-  .chart-wrap { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 8px; padding: 16px; margin-top: 15px; }
-  svg.cf-chart { width: 100%; height: 180px; display: block; overflow: visible; }
-  tr.ncf-row td { background: var(--teal-50) !important; font-weight: 600; color: var(--teal-600); }
-  .neg { color: var(--red-600); font-weight: 500; }
-  .pos { color: var(--teal-600); font-weight: 500; }
+  .scen-name { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .scen-card.opt  .scen-name { color: var(--teal-600); }
+  .scen-card.base .scen-name { color: var(--blue-700); }
+  .scen-card.cons .scen-name { color: var(--amber-600); }
+  .scen-capex { font-size: 22px; font-weight: 600; line-height: 1; margin-bottom: 8px; font-family: var(--mono); }
+  .scen-card.opt  .scen-capex { color: var(--teal-600); }
+  .scen-card.base .scen-capex { color: var(--blue-700); }
+  .scen-card.cons .scen-capex { color: var(--amber-600); }
+  .scen-detail { font-size: 12px; color: var(--gray-700); line-height: 1.6; }
+  .scen-detail span { font-weight: 600; }
+
+  /* SVG CHART */
+  .chart-wrap {
+    margin-top: 16px;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-100);
+    border-radius: 10px;
+    padding: 20px 16px 14px;
+  }
+  .chart-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gray-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  svg.cf-chart { width: 100%; height: 190px; display: block; overflow: visible; }
+
+  /* PARAMS TABLE */
+  .params-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .param-block {
+    background: var(--blue-50);
+    border: 1px solid var(--blue-100);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .param-block-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--blue-700);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--blue-100);
+  }
+  .param-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 3px 0;
+    font-size: 13px;
+  }
+  .param-key { color: var(--gray-700); }
+  .param-val { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--blue-900); }
+
+  /* NOTES */
+  .notes {
+    background: var(--gray-50);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-top: 36px;
+  }
+  .notes-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-700);
+    margin-bottom: 12px;
+  }
+  .note-item {
+    display: flex;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--gray-700);
+    line-height: 1.65;
+    margin-bottom: 8px;
+  }
+  .note-item:last-child { margin-bottom: 0; }
+  .note-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--blue-100);
+    color: var(--blue-800);
+    font-size: 10px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    border-top: 1px solid var(--gray-100);
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: var(--gray-700);
+  }
+  .footer-source span { font-weight: 500; color: var(--blue-700); }
+
+  @media (max-width: 680px) {
+    .doc-header, .doc-body { padding-left: 20px; padding-right: 20px; }
+    .scenario-bar { padding-left: 20px; padding-right: 20px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .scen-grid { grid-template-columns: 1fr; }
+    .params-2col { grid-template-columns: 1fr; }
+    .doc-footer { flex-direction: column; gap: 6px; text-align: center; }
+  }
+
+
+  /* ============================================================
+     NAVIGATION BAR
+  ============================================================ */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Geologica', sans-serif;
+    background: #f4f6f9;
+    color: #2C2C2A;
+    min-height: 100vh;
+  }
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #042C53;
+    box-shadow: 0 2px 16px rgba(4,44,83,0.25);
+  }
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px 0 16px;
+    border-right: 1px solid rgba(255,255,255,0.10);
+    flex-shrink: 0;
+  }
+  .nav-logo svg {
+    width: 22px; height: 22px;
+    color: #85B7EB;
+    flex-shrink: 0;
+  }
+  .nav-logo-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+  .nav-logo-sub {
+    font-size: 10px;
+    font-weight: 300;
+    color: #85B7EB;
+    white-space: nowrap;
+  }
+  .nav-tabs {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0 18px;
+    height: 52px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #85B7EB;
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    font-family: 'Geologica', sans-serif;
+    flex-shrink: 0;
+  }
+  .nav-tab:hover {
+    color: #ffffff;
+    background: rgba(255,255,255,0.05);
+  }
+  .nav-tab.active {
+    color: #ffffff;
+    border-bottom-color: #378ADD;
+    background: rgba(55,138,221,0.10);
+  }
+  .nav-tab svg {
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     TAB PANELS
+  ============================================================ */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Override body padding from original files — panels add their own */
+  .tab-panel .page {
+    margin-top: 0 !important;
+  }
+
+  /* Wrap original body padding */
+  .tab-content-wrap {
+    padding: 36px 20px 60px;
+  }
+
+  /* ============================================================
+     COVER / STUB PAGE
+  ============================================================ */
+  .cover-wrap {
+    padding: 48px 20px 72px;
+  }
+  .cover-card {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(4,44,83,0.10);
+  }
+  .cover-header {
+    background: linear-gradient(135deg, #042C53 0%, #185FA5 100%);
+    padding: 52px 52px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-header::before {
+    content: '';
+    position: absolute;
+    right: -60px; top: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 48px solid rgba(255,255,255,0.05);
+  }
+  .cover-header::after {
+    content: '';
+    position: absolute;
+    right: 80px; bottom: -90px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 30px solid rgba(255,255,255,0.04);
+  }
+  .cover-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #B5D4F4;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .cover-header h1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .cover-header .cover-sub {
+    font-size: 14px;
+    color: #85B7EB;
+    font-weight: 300;
+    position: relative;
+  }
+  .cover-pills {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .cover-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: #B5D4F4;
+  }
+  .cover-pill strong { color: #ffffff; font-weight: 500; }
+
+  .cover-body {
+    padding: 44px 52px 52px;
+  }
+  .cover-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #5F5E5A;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E6F1FB;
+  }
+  .cover-toc {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .cover-toc-item {
+    background: #E6F1FB;
+    border: 1px solid #B5D4F4;
+    border-radius: 10px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, background 0.15s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .cover-toc-item:hover {
+    background: #d0e8fa;
+    box-shadow: 0 2px 12px rgba(4,44,83,0.10);
+  }
+  .cover-toc-num {
+    width: 28px; height: 28px;
+    background: #0C447C;
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; color: #ffffff;
+    flex-shrink: 0;
+  }
+  .cover-toc-text {}
+  .cover-toc-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #042C53;
+    margin-bottom: 3px;
+  }
+  .cover-toc-desc {
+    font-size: 11.5px;
+    color: #5F5E5A;
+    line-height: 1.5;
+  }
+
+  .placeholder-block {
+    background: #F1EFE8;
+    border: 2px dashed #B4B2A9;
+    border-radius: 10px;
+    padding: 28px 24px;
+    text-align: center;
+    color: #5F5E5A;
+  }
+  .placeholder-block svg {
+    width: 32px; height: 32px;
+    color: #B4B2A9;
+    margin-bottom: 10px;
+  }
+  .placeholder-block h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2C2C2A;
+    margin-bottom: 6px;
+  }
+  .placeholder-block p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .cover-footer {
+    border-top: 1px solid #D3D1C7;
+    padding: 16px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11.5px;
+    color: #5F5E5A;
+  }
+  .cover-footer span { font-weight: 500; color: #185FA5; }
+
+  @media (max-width: 640px) {
+    .nav-logo { display: none; }
+    .nav-tab { padding: 0 12px; font-size: 11.5px; }
+    .cover-header, .cover-body { padding-left: 24px; padding-right: 24px; }
+    .cover-footer { padding: 14px 24px; flex-direction: column; gap: 4px; }
+    .cover-toc { grid-template-columns: 1fr; }
+    .tab-content-wrap { padding: 20px 12px 48px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="main-container">
-
-  <nav class="main-nav">
-    <button class="nav-btn active" onclick="switchMainTab(event, 'page-intro')">1. Введение и Допущения</button>
-    <button class="nav-btn" onclick="switchMainTab(event, 'page-solar')">2. Оценка выработки</button>
-    <button class="nav-btn" onclick="switchMainTab(event, 'page-capex')">3. Бюджет CAPEX</button>
-    <button class="nav-btn" onclick="switchMainTab(event, 'page-opex')">4. Операционный OPEX</button>
-    <button class="nav-btn" onclick="switchMainTab(event, 'page-finmodel')">5. Финансовая модель</button>
-  </nav>
-
-  <div id="page-intro" class="tab-content active">
-    <div class="doc-header">
-      <h1>Технико-экономическое обоснование СЭС Бургас</h1>
-      <p class="subtitle">Концептуальные основы, базовые ограничения проекта и ключевые допущения</p>
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+      <div>
+        <div class="nav-logo-text">СЭС Бургас</div>
+        <div class="nav-logo-sub">5,4 МВт DC · Промышленная кровля</div>
+      </div>
     </div>
-    
-    <div class="section-title"><div class="section-num">!</div><h2>Статус документа и назначение расчетов</h2></div>
-    <p>Настоящий интерактивный отчет объединяет технические, инвестиционные и эксплуатационные параметры планируемой к строительству крышной солнечной электростанции (СЭС) проектной мощностью <strong>5,4 МВт·п (DC)</strong> в г. Бургас, Болгария.</p>
-    <br>
-    <p>Цель интеграции — предоставить сквозной анализ влияния инженерных решений (выработка, деградация панелей), инвестиционной структуры (базовый, оптимистичный и консервативный CAPEX) и структуры сервисных контрактов (OPEX) на итоговую окупаемость капитала.</p>
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="cover" onclick="showTab('cover', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        Обзор
+      </button>
+      <button class="nav-tab" data-tab="solar" onclick="showTab('solar', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        Выработка
+      </button>
+      <button class="nav-tab" data-tab="capex" onclick="showTab('capex', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        CAPEX
+      </button>
+      <button class="nav-tab" data-tab="opex" onclick="showTab('opex', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        OPEX
+      </button>
+      <button class="nav-tab" data-tab="fin" onclick="showTab('fin', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Финмодель
+      </button>
+    </div>
+  </div>
+</nav>
 
-    <div class="section-title"><div class="section-num">A</div><h2>Фундаментальные макроэкономические допущения</h2></div>
-    <div class="table-wrap">
+<!-- ============================================================
+     TAB: COVER (STUB)
+============================================================ -->
+<div id="panel-cover" class="tab-panel active">
+  <div class="cover-wrap">
+    <div class="cover-card">
+      <div class="cover-header">
+        <div class="cover-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Предварительный расчёт · Бургас, Болгария
+        </div>
+        <h1>Кровельная солнечная электростанция</h1>
+        <p class="cover-sub">Промышленная кровля &nbsp;·&nbsp; Бургас &nbsp;·&nbsp; ~5,4 МВт DC / 4,9 МВт AC &nbsp;·&nbsp; Площадь 5,5 га</p>
+        <div class="cover-pills">
+          <div class="cover-pill">Годовая выработка: <strong>~6 880 МВч</strong></div>
+          <div class="cover-pill">CAPEX базовый: <strong>3,8–4,3 М€</strong></div>
+          <div class="cover-pill">Срок окупаемости: <strong>8–11 лет</strong></div>
+          <div class="cover-pill">Цены: <strong>2024–2025</strong></div>
+        </div>
+      </div>
+      <div class="cover-body">
+        <div class="cover-section-title">Разделы расчёта</div>
+        <div class="cover-toc">
+          <div class="cover-toc-item" onclick="showTab('solar', document.querySelector('[onclick=\'showTab(\'solar\', this)\']'))">
+            <div class="cover-toc-num">1</div>
+            <div class="cover-toc-text">
+              <div class="cover-toc-label">Оценка выработки</div>
+              <div class="cover-toc-desc">Солнечный ресурс Бургаса, расчёт установленной мощности, годовой выработки и коэффициента использования.</div>
+            </div>
+          </div>
+          <div class="cover-toc-item" onclick="showTab('capex', document.querySelector('[onclick=\'showTab(\'capex\', this)\']'))">
+            <div class="cover-toc-num">2</div>
+            <div class="cover-toc-text">
+              <div class="cover-toc-label">CAPEX</div>
+              <div class="cover-toc-desc">Капитальные затраты по EPC-методологии: оборудование, СМР, косвенные затраты. Сценарный анализ.</div>
+            </div>
+          </div>
+          <div class="cover-toc-item" onclick="showTab('opex', document.querySelector('[onclick=\'showTab(\'opex\', this)\']'))">
+            <div class="cover-toc-num">3</div>
+            <div class="cover-toc-text">
+              <div class="cover-toc-label">OPEX</div>
+              <div class="cover-toc-desc">Операционные расходы: техобслуживание, страхование, сетевые платежи, замена инверторов.</div>
+            </div>
+          </div>
+          <div class="cover-toc-item" onclick="showTab('fin', document.querySelector('[onclick=\'showTab(\'fin\', this)\']'))">
+            <div class="cover-toc-num">4</div>
+            <div class="cover-toc-text">
+              <div class="cover-toc-label">Финансовая модель</div>
+              <div class="cover-toc-desc">25-летний денежный поток, NPV, IRR, срок окупаемости. Сценарии: оптимистичный / базовый / консервативный.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cover-section-title">Допущения и примечания</div>
+        <div class="placeholder-block">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14,2 14,8 20,8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10,9 9,9 8,9"/>
+          </svg>
+          <h3>Раздел в разработке</h3>
+          <p>Здесь будут размещены общие допущения и примечания,<br>принятые при выполнении расчётов по всем разделам.</p>
+        </div>
+      </div>
+      <div class="cover-footer">
+        <div>Проект: <span>СЭС на промышленной кровле · Бургас, Болгария</span></div>
+        <div>Предварительный расчёт &nbsp;·&nbsp; 2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TAB: ВЫРАБОТКА
+============================================================ -->
+<div id="panel-solar" class="tab-panel">
+  <div class="tab-content-wrap">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="header-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      Предварительный расчёт
+    </div>
+    <h1>Оценка выработки солнечной электростанции</h1>
+    <p class="subtitle">Промышленная кровля &nbsp;·&nbsp; Бургас, Болгария &nbsp;·&nbsp; Источник инсоляции: PVGIS (EC JRC)</p>
+    <div class="meta-pills">
+      <div class="meta-pill">Площадь кровли: <strong>5,5 га</strong></div>
+      <div class="meta-pill">Мощность DC: <strong>≈ 5,4 МВт·п</strong></div>
+      <div class="meta-pill">Выработка: <strong>6,8 – 7,0 ГВт·ч/год</strong></div>
+      <div class="meta-pill">TMY · Наклон ~35°</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="doc-body">
+
+    <!-- SECTION 1 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">1</div>
+        <h2>Исходные параметры</h2>
+      </div>
+      <p class="section-lead">
+        Коэффициент использования площади 55% учитывает технологические проходы, отступы от края кровли, противопожарные разрывы и потери при рядной расстановке панелей с наклоном ~35°. Доля площади непосредственно под модулями (85% от рабочей) учитывает межрядные промежутки для исключения взаимного затенения.
+      </p>
       <table>
-        <thead>
-          <tr><th>Параметр макросреды</th><th class="val">Базовое значение</th><th>Обоснование / Источник</th></tr>
-        </thead>
+        <thead><tr>
+          <th>Параметр</th>
+          <th>Значение</th>
+          <th>Примечание</th>
+        </tr></thead>
         <tbody>
-          <tr><td>Ставка дисконтирования (WACC / Equity)</td><td class="val">7,0%</td><td>Ожидаемая стоимость собственного капитала инвестора</td></tr>
-          <tr><td>Базовый коммерческий тариф на э/э (Год 1)</td><td class="val">0,130 € / кВт·ч</td><td>Eurostat H2 2025 для нежилых объектов (средний диапазон)</td></tr>
-          <tr><td>Ежегодная индексация тарифа сети</td><td class="val">2,5%</td><td>Прогноз изменения стоимости энергии в долгосрочной перспективе</td></tr>
-          <tr><td>Ставка налога на прибыль (Корпоративный налог)</td><td class="val">10,0%</td><td>Налоговое законодательство Республики Болгария</td></tr>
-          <tr><td>Ежегодная инфляция операционных затрат (O&M)</td><td class="val">2,5%</td><td>Таргетируемый долгосрочный CPI в ЕС</td></tr>
+          <tr><td>Общая площадь кровли</td><td class="val">55 000 м²</td><td>5,5 га</td></tr>
+          <tr><td>Коэффициент использования площади</td><td class="val">55%</td><td>Типово для пром. кровель</td></tr>
+          <tr><td>Рабочая площадь</td><td class="val">30 250 м²</td><td>55 000 × 0,55</td></tr>
+          <tr><td>Площадь под модули (85% от рабочей)</td><td class="val">25 715 м²</td><td>30 250 × 0,85</td></tr>
+          <tr><td>Удельная мощность модуля</td><td class="val">210 Вт/м²</td><td>Топ пром. панели 2024–25</td></tr>
+          <tr><td>Инсоляция (PVGIS, Бургас)</td><td class="val">1 580 кВт·ч/м²/год</td><td>Оптим. наклон ~35°</td></tr>
+          <tr><td>Performance Ratio (PR)</td><td class="val">0,80</td><td>Инв. + темп. + кабели</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="section-title"><div class="section-num">B</div><h2>Ключевые технологические рамки</h2></div>
+    <!-- SECTION 2 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">2</div>
+        <h2>Установленная мощность</h2>
+      </div>
+      <div class="subsection">
+        <h3>Мощность DC (пиковая)</h3>
+      </div>
+      <p class="section-lead">Площадь под модули × удельная мощность панели:</p>
+      <div class="formula-block">
+        <div class="formula-label">Формула</div>
+        P_DC = 25 715 м² × 210 Вт/м² = 5 400 350 Вт ≈ <strong>5 400 кВт·п (5,4 МВт·п)</strong>
+      </div>
+      <div class="subsection">
+        <h3>Мощность AC</h3>
+      </div>
+      <p class="section-lead">Инверторный коэффициент DC/AC принят 1,10 (стандарт для крупных пром. СЭС):</p>
+      <div class="formula-block">
+        <div class="formula-label">Формула</div>
+        P_AC = 5 400 / 1,10 ≈ <strong>4 909 кВт AC ≈ 4,9 МВт</strong>
+      </div>
+      <table style="margin-top:16px">
+        <thead><tr><th>Расчётная величина</th><th>Результат</th></tr></thead>
+        <tbody>
+          <tr><td>Установленная мощность DC</td><td class="val">≈ 5 400 кВт·п (5,4 МВт·п)</td></tr>
+          <tr><td>Установленная мощность AC (÷ 1,10)</td><td class="val">≈ 4 900 кВт AC (4,9 МВт)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">3</div>
+        <h2>Годовая выработка электроэнергии</h2>
+      </div>
+      <div class="subsection">
+        <h3>Метод A — через удельную выработку</h3>
+      </div>
+      <p class="section-lead">Удельная выработка = Инсоляция × PR = 1 580 × 0,80 = 1 264 кВт·ч / кВт·п / год</p>
+      <div class="formula-block">
+        <div class="formula-label">Расчёт</div>
+        E_год = 5 400 кВт·п × 1 264 кВт·ч/кВт·п = 6 825 600 кВт·ч ≈ <strong>6,83 ГВт·ч</strong>
+      </div>
+      <div class="subsection">
+        <h3>Метод B — прямой расчёт через инсоляцию</h3>
+      </div>
+      <div class="formula-block">
+        <div class="formula-label">Расчёт</div>
+        E_год = 25 715 м² × 210 Вт/м² × 1 580 ч/м² × 0,80 / 1 000 = <strong>6 826 МВт·ч</strong>
+      </div>
+      <p class="section-lead" style="margin-top:14px">Оба метода дают совпадающий результат:</p>
+      <table>
+        <thead><tr><th>Метод расчёта</th><th>Годовая выработка</th></tr></thead>
+        <tbody>
+          <tr><td>Через удельную выработку (1 264 кВт·ч/кВт·п)</td><td class="val">≈ 6 826 МВт·ч (6,8 ГВт·ч)</td></tr>
+          <tr><td>Через инсоляцию × PR (1 580 × 0,80)</td><td class="val">≈ 6 906 МВт·ч (6,9 ГВт·ч)</td></tr>
+          <tr class="result-row"><td><strong>Итоговый диапазон</strong></td><td class="val"><strong>6,8 – 7,0 ГВт·ч / год</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">4</div>
+        <h2>Сезонное распределение генерации</h2>
+      </div>
+      <p class="section-lead">Бургас имеет выраженную средиземноморско-континентальную сезонность. Распределение по данным PVGIS:</p>
+      <div class="season-grid">
+        <div class="season-card summer">
+          <div class="season-name">Летний пик</div>
+          <div class="season-period">Май – Август</div>
+          <div class="season-share">~50%</div>
+          <div class="season-kwh">850 000 – 900 000 кВт·ч/мес.<br>Пиковая генерация</div>
+        </div>
+        <div class="season-card spring">
+          <div class="season-name">Переходный сезон</div>
+          <div class="season-period">Март–Апр., Сент.–Окт.</div>
+          <div class="season-share">~32%</div>
+          <div class="season-kwh">440 000 – 550 000 кВт·ч/мес.<br>Умеренная генерация</div>
+        </div>
+        <div class="season-card winter">
+          <div class="season-name">Зимний минимум</div>
+          <div class="season-period">Ноябрь – Февраль</div>
+          <div class="season-share">~18%</div>
+          <div class="season-kwh">155 000 – 200 000 кВт·ч/мес.<br>Минимальная генерация</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">5</div>
+        <h2>Итоговые показатели</h2>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Рабочая площадь</div>
+          <div class="kpi-value">30 250</div>
+          <div class="kpi-unit">м²</div>
+        </div>
+        <div class="kpi-card accent">
+          <div class="kpi-label">Мощность DC</div>
+          <div class="kpi-value">5,4</div>
+          <div class="kpi-unit">МВт·п</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Мощность AC</div>
+          <div class="kpi-value">4,9</div>
+          <div class="kpi-unit">МВт</div>
+        </div>
+        <div class="kpi-card accent">
+          <div class="kpi-label">Годовая выработка</div>
+          <div class="kpi-value">6,8–7,0</div>
+          <div class="kpi-unit">ГВт·ч / год</div>
+        </div>
+      </div>
+      <table style="margin-top:20px">
+        <thead><tr><th>Показатель</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td>Удельная выработка</td><td class="val">1 264 кВт·ч / кВт·п / год</td></tr>
+          <tr><td>Летний пик (май – авг.), среднее в месяц</td><td class="val">850 000 – 900 000 кВт·ч</td></tr>
+          <tr><td>Зимний минимум (ноя – фев), среднее в месяц</td><td class="val">155 000 – 200 000 кВт·ч</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- NOTES -->
     <div class="notes">
-      <div class="note-item"><div class="note-dot">1</div><span><strong>Схема монетизации:</strong> 100% самопотребление (замещение собственной закупки из сети). Продажа излишков заблокирована.</span></div>
-      <div class="note-item"><div class="note-dot">2</div><span><strong>Срок полезного использования проекта:</strong> 25 лет. Амортизация активов рассчитывается линейным методом.</span></div>
-      <div class="note-item"><div class="note-dot">3</div><span><strong>Техническое старение:</strong> Коэффициент деградации производительности фотоэлектрических модулей принят на уровне 0,4% в год.</span></div>
-    </div>
-  </div>
-
-  <div id="page-solar" class="tab-content">
-    <div class="doc-header">
-      <h1>Оценка генерации фотоэлектрической системы</h1>
-      <p class="subtitle">Данные инсоляции и расчет годовой выработки по модели PVGIS (EC JRC)</p>
-    </div>
-    
-    <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-label">Мощность массива DC</div><div class="kpi-value">5 400</div><div class="kpi-unit">кВт·п</div></div>
-      <div class="kpi-card"><div class="kpi-label">Генерация, Год 1</div><div class="kpi-value">6 900</div><div class="kpi-unit">МВт·ч / год</div></div>
-      <div class="kpi-card"><div class="kpi-label">Удельная выработка</div><div class="kpi-value">1 264</div><div class="kpi-unit">кВт·ч / кВт·п / год</div></div>
+      <div class="notes-title">Примечания</div>
+      <div class="note-item">
+        <div class="note-dot">1</div>
+        <span>Расчёт является предварительным. Точные значения определяются после инструментального замера инсоляции и аэрофотосъёмки кровли.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">2</div>
+        <span>PR = 0,80 соответствует умеренно-консервативной оценке с учётом загрязнения панелей, деградации 0,4%/год, температурных потерь и потерь в кабельной сети.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">3</div>
+        <span>Источник инсоляции: PVGIS (EC JRC), горизонт расчёта TMY (Typical Meteorological Year).</span>
+      </div>
     </div>
 
-    <div class="section-title"><div class="section-num">1</div><h2>Помесячное распределение генерации</h2></div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Месяц</th><th>Инсоляция (кВт·ч/м²)</th><th class="val">Выработка СЭС (МВт·ч)</th><th>Доля в годовом объеме</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Январь</td><td>48,2</td><td class="val">198</td><td>2,9%</td></tr>
-          <tr><td>Февраль</td><td>62,1</td><td class="val">245</td><td>3,6%</td></tr>
-          <tr><td>Март</td><td>104,5</td><td class="val">422</td><td>6,1%</td></tr>
-          <tr><td>Апрель</td><td>142,0</td><td class="val">580</td><td>8,4%</td></tr>
-          <tr><td>Май</td><td>185,4</td><td class="val">792</td><td>11,5%</td></tr>
-          <tr><td>Июнь</td><td>210,8</td><td class="val">885</td><td>12,8%</td></tr>
-          <tr><td>Июль</td><td>224,1</td><td class="val">932</td><td>13,5%</td></tr>
-          <tr><td>Август</td><td>198,6</td><td class="val">846</td><td>12,3%</td></tr>
-          <tr><td>Сентябрь</td><td>138,5</td><td class="val">572</td><td>8,3%</td></tr>
-          <tr><td>Октябрь</td><td>92,4</td><td class="val">394</td><td>5,7%</td></tr>
-          <tr><td>Ноябрь</td><td>52,1</td><td class="val">215</td><td>3,1%</td></tr>
-          <tr><td>Декабрь</td><td>38,4</td><td class="val">161</td><td>2,3%</td></tr>
-          <tr style="font-weight:600; background:var(--blue-50);"><td>Итого за год</td><td>1 497,2</td><td class="val">6 900</td><td>100,0%</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  </div><!-- /doc-body -->
 
-  <div id="page-capex" class="tab-content">
-    <div class="doc-header">
-      <h1>Инвестиционный бюджет проекта (CAPEX)</h1>
-      <p class="subtitle">Структурирование единовременных капитальных вложений по технологическим пакетам</p>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Статья инвестиций</th><th>Описание компонентов</th><th class="val">Сумма, К€</th><th>Доля в бюджете</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>PV-модули (Tier-1)</td><td>N-type TOPCon, 600W+, высокая эффективность</td><td class="val">1 420</td><td>35,1%</td></tr>
-          <tr><td>Инверторное оборудование</td><td>Промышленные стринговые инверторы 250 кВт, AC-щиты</td><td class="val">445</td><td>11,0%</td></tr>
-          <tr><td>Опорные металлоконструкции</td><td>Алюминиевые балластные/кляймерные системы для кровли</td><td class="val">520</td><td>12,8%</td></tr>
-          <tr><td>DC/AC кабельная сеть и BoS</td><td>Кабели, лотки, заземление, коннекторы, шкафы сбора</td><td class="val">360</td><td>8,9%</td></tr>
-          <tr><td>Трансформаторная подстанция</td><td>КТП 0,4/20 кВ, ячейки, учет, интеграция с ГРЩ завода</td><td class="val">290</td><td>7,2%</td></tr>
-          <tr><td>Строительно-монтажные работы</td><td>Монтаж конструкций, панелей, прокладка кабелей</td><td class="val">410</td><td>10,1%</td></tr>
-          <tr><td>Проектирование и девелопмент</td><td>Инженерные изыскания, ТЭО, согласования, надзор</td><td class="val">130</td><td>3,2%</td></tr>
-          <tr><td>Непредвиденные расходы (5%)</td><td>Резерв на изменение цен, логистику, доп. работы</td><td class="val">205</td><td>5,1%</td></tr>
-          <tr style="font-weight:600; background:var(--blue-800); color:var(--white);"><td>Всего (Базовый CAPEX)</td><td>Удельная стоимость: ~750 €/кВт·п</td><td class="val">4 050</td><td>100,0%</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div id="page-opex" class="tab-content">
-    <div class="doc-header">
-      <h1>Операционные расходы (OPEX)</h1>
-      <p class="subtitle">Ежегодные затраты на эксплуатацию и содержание СЭС</p>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Компонент OPEX</th><th>Регулярность / База расчета</th><th class="val">Сценарий А (Внешний EPC), К€/год</th><th class="val">Сценарий Б (Свой штат), К€/год</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Техническое обслуживание (O&M)</td><td>Мониторинг, регламентный осмотр, протяжка контактов</td><td class="val">48,0</td><td class="val">28,0</td></tr>
-          <tr><td>Очистка и мытье панелей</td><td>2 раза в год (роботизированная / ручная мойка)</td><td class="val">22,0</td><td class="val">16,0</td></tr>
-          <tr><td>Страхование (Allianz / Groupama)</td><td>0,35% от базовой стоимости CAPEX (All-Risks)</td><td class="val">14,2</td><td class="val">14,2</td></tr>
-          <tr><td>Диспетчеризация и безопасность</td><td>Круглосуточный удаленный пульт, охрана периметра</td><td class="val">12,0</td><td class="val">6,0</td></tr>
-          <tr><td>Администрирование и аренда каналов</td><td>Лицензии на ПО мониторинга, отчетность перед АУЭ</td><td class="val">6,8</td><td class="val">3,8</td></tr>
-          <tr style="font-weight:600; background:var(--blue-50);"><td>Итого OPEX (Год 1)</td><td>Удельный OPEX: 14–19 €/кВт/год</td><td class="val">103,0</td><td class="val">68,0</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size:13px; color:var(--gray-700); margin-top:8px;">* В расчетах финансовой модели (вкладка 5) консервативно используется Сценарий А (103 К€/год) с последующей ежегодной инфляцией 2,5%.</p>
-  </div>
-
-  <div id="page-finmodel" class="tab-content">
-    <div class="doc-header">
-      <h1>Интерактивная финансовая модель</h1>
-      <p class="subtitle">Расчет дисконтированных потоков (DCF), инвестиционных сценариев и графиков окупаемости</p>
-    </div>
-
-    <div class="scenario-bar">
-      <span style="font-size:12px; font-weight:600; color:var(--gray-700); text-transform:uppercase;">Выбор сценария инвестиций:</span>
-      <button class="scen-btn active" id="btn-scen-base" onclick="setScenario('base')">Базовый · 4 050 К€</button>
-      <button class="scen-btn" id="btn-scen-opt" onclick="setScenario('opt')">Оптимистичный · 3 800 К€</button>
-      <button class="scen-btn" id="btn-scen-cons" onclick="setScenario('cons')">Консервативный · 4 300 К€</button>
-    </div>
-
-    <div class="kpi-grid" id="kpi-grid"></div>
-
-    <div class="section-title"><div class="section-num">3.1</div><h2>Кумулятивный денежный поток</h2></div>
-    <div class="chart-wrap">
-      <div style="font-size:12px; font-weight:500; color:var(--gray-700); margin-bottom:10px; text-transform:uppercase;">Кумулятивный NCF нарастающим итогом, К€</div>
-      <svg class="cf-chart" id="cf-svg" viewBox="0 0 820 190"></svg>
-    </div>
-
-    <div class="section-title"><div class="section-num">3.2</div><h2>Прогноз движения денежных средств (Cash Flow), К€</h2></div>
-    <div class="table-wrap">
-      <table id="cf-table"></table>
-    </div>
-
-    <div class="section-title"><div class="section-num">3.3</div><h2>Сравнительный анализ отклонений</h2></div>
-    <div class="scen-grid" id="scen-cards"></div>
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-source">Источник данных: <span>PVGIS (EC JRC)</span> &nbsp;·&nbsp; Методика: TMY</div>
+    <div>Предварительный расчёт &nbsp;·&nbsp; 2025</div>
   </div>
 
 </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TAB: CAPEX
+============================================================ -->
+<div id="panel-capex" class="tab-panel">
+  <div class="tab-content-wrap">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="header-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+      Предварительный расчёт · EPC-методология
+    </div>
+    <h1>Капитальные затраты на строительство СЭС</h1>
+    <p class="subtitle">Промышленная кровля &nbsp;·&nbsp; Бургас, Болгария &nbsp;·&nbsp; Установленная мощность ~5,4 МВт DC / 4,9 МВт AC</p>
+    <div class="meta-pills">
+      <div class="meta-pill">Площадь кровли: <strong>5,5 га</strong></div>
+      <div class="meta-pill">CAPEX базовый: <strong>3,8–4,3 М€</strong></div>
+      <div class="meta-pill">Удельный: <strong>700–800 €/кВт DC</strong></div>
+      <div class="meta-pill">Цены: Европа 2024–2025</div>
+    </div>
+  </div>
+
+  <div class="doc-body">
+
+    <!-- SECTION 1 — МЕТОДОЛОГИЯ -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">1</div>
+        <h2>Методология и структура CAPEX</h2>
+      </div>
+      <p class="section-lead">
+        Расчёт выполнен по EPC-методологии (Engineering, Procurement, Construction) — стандарту для промышленных СЭС. Затраты разбиты на три блока: оборудование (Hard Costs — Equipment), строительно-монтажные работы (Hard Costs — Installation) и косвенные затраты (Soft Costs). База расчёта — установленная мощность <strong>5 400 кВт DC</strong>, полученная в предыдущем разделе проекта.
+      </p>
+      <div class="callout info">
+        <div class="callout-icon">i</div>
+        <div>Все ценовые диапазоны основаны на аналитических данных европейского рынка за 2024–2025 год. Актуальные коммерческие предложения могут отличаться. Позиции, требующие верификации через запросы поставщикам, отмечены отдельно.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 — БЛОК A: ОБОРУДОВАНИЕ -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">2</div>
+        <h2>Блок A — Оборудование</h2>
+      </div>
+
+      <div class="subsection"><h3>A1. Солнечные модули</h3></div>
+      <p class="section-lead">Монокристаллические модули PERC/TOPCon, удельная мощность 210 Вт/м² (420–450 Вт/панель). Поставщики: Longi, JA Solar, Jinko, Risen, Axitec.</p>
+      <table>
+        <thead><tr>
+          <th>Параметр</th>
+          <th class="right">Значение</th>
+          <th>Примечание</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Количество модулей (~430 Вт/шт)</td><td class="val">≈ 12 560 шт.</td><td>5 400 000 Вт ÷ 430 Вт</td></tr>
+          <tr><td>Цена модуля (DDP Европа)</td><td class="val">0,18–0,24 €/Вт</td><td>Рыночный диапазон 2024–25</td></tr>
+          <tr><td>Стоимость (нижняя граница)</td><td class="val">≈ 972 000 €</td><td>5 400 кВт × 180 €/кВт</td></tr>
+          <tr class="subtotal-row"><td><strong>Итого — модули</strong></td><td class="val"><strong>970 000 – 1 300 000 €</strong></td><td>~22–26% от CAPEX</td></tr>
+        </tbody>
+      </table>
+      <div class="callout verify">
+        <div class="callout-icon">!</div>
+        <div><strong>К верификации:</strong> получить котировки у 3–4 дистрибьюторов. Уточнить: условия DDP/EXW, гарантия мощности ≥25 лет, деградация ≤0,4%/год, сертификаты IEC для болгарского рынка.</div>
+      </div>
+
+      <div class="subsection"><h3>A2. Инверторы</h3></div>
+      <p class="section-lead">Для 4,9 МВт AC — центральные 500–1000 кВт или стринговые 100–250 кВт. Поставщики: Huawei, SMA, Sungrow, Fronius, ABB/Fimer.</p>
+      <table>
+        <thead><tr><th>Параметр</th><th class="right">Значение</th><th>Примечание</th></tr></thead>
+        <tbody>
+          <tr><td>Мощность AC (инверторная)</td><td class="val">4 900 кВт</td><td>DC/AC ratio = 1,10</td></tr>
+          <tr><td>Ценовой диапазон</td><td class="val">50–90 €/кВт AC</td><td>Стринговые / центральные</td></tr>
+          <tr class="subtotal-row"><td><strong>Итого — инверторы</strong></td><td class="val"><strong>245 000 – 440 000 €</strong></td><td>~5–9% от CAPEX</td></tr>
+        </tbody>
+      </table>
+      <div class="callout verify">
+        <div class="callout-icon">!</div>
+        <div><strong>К верификации:</strong> выбор типа инвертора после анализа конфигурации кровли. Стринговые — гибче при неоднородной форме, центральные — экономичнее на однородных секциях. Запросить котировки с гарантией 10+ лет и системой мониторинга.</div>
+      </div>
+
+      <div class="subsection"><h3>A3. Монтажные конструкции</h3></div>
+      <p class="section-lead">Балластные безпрокольные системы с регулируемым наклоном ~35° или крепёж к несущим конструкциям кровли. Поставщики: K2 Systems, Schletter, Clenergy, Esdec.</p>
+      <table>
+        <thead><tr><th>Параметр</th><th class="right">Значение</th><th>Примечание</th></tr></thead>
+        <tbody>
+          <tr><td>Ценовой диапазон</td><td class="val">60–100 €/кВт DC</td><td>Без монтажа</td></tr>
+          <tr class="subtotal-row"><td><strong>Итого — конструкции</strong></td><td class="val"><strong>325 000 – 540 000 €</strong></td><td>~7–11% от CAPEX</td></tr>
+        </tbody>
+      </table>
+      <div class="callout verify">
+        <div class="callout-icon">!</div>
+        <div><strong>К верификации:</strong> тип системы определяется после конструктивного обследования кровли. Балластные системы добавляют 15–25 кг/м² — для 5,5 га это существенная нагрузка. Возможное усиление кровли — отдельная статья затрат, не включённая в базовый расчёт.</div>
+      </div>
+
+      <div class="subsection"><h3>A4. Электрика, кабельная сеть, защита</h3></div>
+      <table>
+        <thead><tr><th>Статья</th><th class="right">€/кВт DC</th><th class="right">Сумма, €</th></tr></thead>
+        <tbody>
+          <tr><td>DC-кабели и соединители</td><td class="right">15–25</td><td class="right">81 000 – 135 000</td></tr>
+          <tr><td>AC-кабели и распределение</td><td class="right">20–35</td><td class="right">108 000 – 189 000</td></tr>
+          <tr><td>Защита, автоматика, молниезащита</td><td class="right">10–20</td><td class="right">54 000 – 108 000</td></tr>
+          <tr class="subtotal-row"><td><strong>Итого — электрика</strong></td><td class="right"><strong>45–80</strong></td><td class="right"><strong>243 000 – 432 000 €</strong></td></tr>
+        </tbody>
+      </table>
+
+      <div class="subsection"><h3>A5. Трансформатор и подключение к сети</h3></div>
+      <p class="section-lead">Повышающий трансформатор 0,4/10–20 кВ и присоединение к среднему напряжению. Стоимость критически зависит от расстояния до точки подключения и требований EVN (сетевой оператор Бургасской области).</p>
+      <table>
+        <thead><tr><th>Статья</th><th class="right">Нижн., €</th><th class="right">Верхн., €</th></tr></thead>
+        <tbody>
+          <tr><td>Трансформатор 6–10 МВА с КТП</td><td class="right">80 000</td><td class="right">150 000</td></tr>
+          <tr><td>Присоединение к сети (кабель / линия)</td><td class="right">50 000</td><td class="right">250 000</td></tr>
+          <tr class="subtotal-row"><td><strong>Итого — трансформатор и подключение</strong></td><td class="right"><strong>130 000</strong></td><td class="right"><strong>400 000 €</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="callout verify">
+        <div class="callout-icon">!</div>
+        <div><strong>Наиболее неопределённая статья CAPEX.</strong> Условия технологического присоединения определяются EVN. Необходимо получить Технические условия (ТУ) — расстояние до точки подключения может кардинально изменить итоговую цифру.</div>
+      </div>
+
+      <div class="subsection"><h3>A6. Система мониторинга и SCADA</h3></div>
+      <table>
+        <thead><tr><th>Статья</th><th class="right">Сумма, €</th><th>Примечание</th></tr></thead>
+        <tbody>
+          <tr><td>Мониторинг (датчики, контроллеры, ПО)</td><td class="right">20 000 – 50 000</td><td>Часто включается в поставку инверторов</td></tr>
+          <tr><td>Метеостанция (пиранометр, термодатчики)</td><td class="right">5 000 – 15 000</td><td>Для точного учёта и отчётности</td></tr>
+          <tr class="subtotal-row"><td><strong>Итого — мониторинг</strong></td><td class="right"><strong>25 000 – 65 000 €</strong></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- ИТОГО БЛОК A -->
+      <div class="subsection"><h3>Итого по блоку A</h3></div>
+      <table>
+        <thead><tr><th>Статья</th><th class="right">Нижн., €</th><th class="right">Верхн., €</th><th class="center">% от CAPEX</th></tr></thead>
+        <tbody>
+          <tr><td>A1 — Модули</td><td class="right">970 000</td><td class="right">1 300 000</td><td class="center">22–26%</td></tr>
+          <tr><td>A2 — Инверторы</td><td class="right">245 000</td><td class="right">440 000</td><td class="center">5–9%</td></tr>
+          <tr><td>A3 — Конструкции</td><td class="right">325 000</td><td class="right">540 000</td><td class="center">7–11%</td></tr>
+          <tr><td>A4 — Электрика</td><td class="right">243 000</td><td class="right">432 000</td><td class="center">5–9%</td></tr>
+          <tr><td>A5 — Трансформатор и подключение</td><td class="right">130 000</td><td class="right">400 000</td><td class="center">3–8%</td></tr>
+          <tr><td>A6 — Мониторинг</td><td class="right">25 000</td><td class="right">65 000</td><td class="center">~1%</td></tr>
+          <tr class="result-row"><td><strong>ИТОГО оборудование</strong></td><td class="val">1 938 000</td><td class="val">3 177 000</td><td class="val">~60–65%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 3 — БЛОК B: СМР -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">3</div>
+        <h2>Блок B — Строительно-монтажные работы</h2>
+      </div>
+      <table>
+        <thead><tr><th>Статья</th><th class="right">€/кВт DC</th><th class="right">Нижн., €</th><th class="right">Верхн., €</th></tr></thead>
+        <tbody>
+          <tr><td>Монтаж несущих конструкций</td><td class="right">25–40</td><td class="right">135 000</td><td class="right">216 000</td></tr>
+          <tr><td>Монтаж модулей</td><td class="right">20–35</td><td class="right">108 000</td><td class="right">189 000</td></tr>
+          <tr><td>Электромонтажные работы (DC + AC)</td><td class="right">30–50</td><td class="right">162 000</td><td class="right">270 000</td></tr>
+          <tr><td>Монтаж инверторов и щитового оборудования</td><td class="right">10–20</td><td class="right">54 000</td><td class="right">108 000</td></tr>
+          <tr><td>Пусконаладочные работы, ввод в эксплуатацию</td><td class="right">10–15</td><td class="right">54 000</td><td class="right">81 000</td></tr>
+          <tr><td>Логистика (доставка на объект)</td><td class="right">5–10</td><td class="right">27 000</td><td class="right">54 000</td></tr>
+          <tr class="result-row"><td><strong>ИТОГО СМР</strong></td><td class="val">100–170</td><td class="val">540 000</td><td class="val">918 000 €</td></tr>
+        </tbody>
+      </table>
+      <div class="callout verify">
+        <div class="callout-icon">!</div>
+        <div><strong>К верификации:</strong> стоимость монтажных работ в Болгарии, как правило, на 15–25% ниже средней по Западной Европе. Рекомендуется тендер среди 3 местных EPC-подрядчиков с опытом в кровельных СЭС от 1 МВт. Проверить наличие лицензий на электромонтажные работы.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 — БЛОК C: SOFT COSTS -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">4</div>
+        <h2>Блок C — Косвенные затраты (Soft Costs)</h2>
+      </div>
+      <table>
+        <thead><tr><th>Статья</th><th>База</th><th class="right">Нижн., €</th><th class="right">Верхн., €</th></tr></thead>
+        <tbody>
+          <tr><td>Проектирование (технический проект)</td><td>1,5–2,5% от Hard Costs</td><td class="right">37 000</td><td class="right">102 000</td></tr>
+          <tr><td>Технический надзор (Owner's Engineer)</td><td>1–1,5% от Hard Costs</td><td class="right">25 000</td><td class="right">62 000</td></tr>
+          <tr><td>Разрешения, согласования, экспертизы</td><td>фиксированные</td><td class="right">15 000</td><td class="right">40 000</td></tr>
+          <tr><td>Страхование строительства (CAR)</td><td>0,3–0,5% от Hard Costs</td><td class="right">7 500</td><td class="right">21 000</td></tr>
+          <tr><td>Юридическое сопровождение и аудит</td><td>фиксированные</td><td class="right">10 000</td><td class="right">30 000</td></tr>
+          <tr><td>Обследование кровли (нагрузки, состояние)</td><td>фиксированные</td><td class="right">5 000</td><td class="right">15 000</td></tr>
+          <tr><td>Энергетическое моделирование (PVsyst)</td><td>фиксированные</td><td class="right">5 000</td><td class="right">12 000</td></tr>
+          <tr><td>Непредвиденные расходы (contingency)</td><td>5–8% от Hard Costs</td><td class="right">124 000</td><td class="right">328 000</td></tr>
+          <tr class="result-row"><td><strong>ИТОГО косвенные затраты</strong></td><td></td><td class="val">228 500</td><td class="val">610 000 €</td></tr>
+        </tbody>
+      </table>
+      <div class="callout info">
+        <div class="callout-icon">i</div>
+        <div>Статья «непредвиденные расходы» (contingency 5–8%) обязательна для предварительного расчёта. На стадии детального проектирования сокращается до 2–3%. Особого внимания требуют: возможное усиление кровли, непредвиденная длина кабельных трасс, стоимость ТУ на подключение.</div>
+      </div>
+      <div class="callout verify">
+        <div class="callout-icon">!</div>
+        <div><strong>К верификации:</strong> стоимость и перечень разрешений определяются болгарским законодательством (ЗЕВИ) и нормативами Бургасской области. Детальный разбор — в чате «Регуляторика».</div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 — СВОДНЫЙ БЮДЖЕТ -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">5</div>
+        <h2>Сводный бюджет CAPEX</h2>
+      </div>
+      <table>
+        <thead><tr><th>Блок</th><th class="right">Нижн., €</th><th class="right">Верхн., €</th><th class="center">% от CAPEX</th></tr></thead>
+        <tbody>
+          <tr><td>A — Оборудование</td><td class="right">1 938 000</td><td class="right">3 177 000</td><td class="center">~60–65%</td></tr>
+          <tr><td>B — СМР (монтаж)</td><td class="right">540 000</td><td class="right">918 000</td><td class="center">~18–20%</td></tr>
+          <tr><td>C — Косвенные затраты</td><td class="right">228 500</td><td class="right">610 000</td><td class="center">~8–15%</td></tr>
+          <tr class="result-row"><td><strong>ИТОГО CAPEX</strong></td><td class="val">2 706 500</td><td class="val">4 705 000</td><td class="val">100%</td></tr>
+        </tbody>
+      </table>
+      <p class="section-lead" style="margin-top:8px; font-size:12.5px;">Округлённый диапазон для целей планирования: <strong>2,7 – 4,7 М€</strong></p>
+      <div class="callout info">
+        <div class="callout-icon">i</div>
+        <div>Широкий диапазон (почти 2×) обусловлен тремя ключевыми неопределённостями: волатильность цен на модули, стоимость подключения к сети, возможное усиление кровли. После получения ТУ от EVN и коммерческих предложений от поставщиков диапазон сужается до ±10–15%.</div>
+      </div>
+
+      <div class="subsection"><h3>Сценарный анализ</h3></div>
+      <div class="scenario-grid">
+        <div class="scenario-card optimistic">
+          <div class="sc-name">Оптимистичный</div>
+          <div class="sc-total">≈ 2,7 М€</div>
+          <div class="sc-per-kw">≈ 500 €/кВт DC</div>
+          <div class="sc-desc">Короткая линия подключения, балластное крепление без усиления кровли, конкурентные цены на модули, болгарский EPC-подрядчик.</div>
+        </div>
+        <div class="scenario-card base">
+          <div class="sc-name">Базовый · рекомендуемый</div>
+          <div class="sc-total">≈ 3,8–4,3 М€</div>
+          <div class="sc-per-kw">≈ 700–800 €/кВт DC</div>
+          <div class="sc-desc">Типовые условия подключения, стандартные монтажные системы, рыночные цены на оборудование, европейский EPC.</div>
+        </div>
+        <div class="scenario-card conservative">
+          <div class="sc-name">Консервативный</div>
+          <div class="sc-total">≈ 4,7 М€</div>
+          <div class="sc-per-kw">≈ 870 €/кВт DC</div>
+          <div class="sc-desc">Дальняя точка подключения, необходимость усиления кровли, премиальное оборудование, высокие затраты на согласования.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6 — УДЕЛЬНЫЕ ПОКАЗАТЕЛИ -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">6</div>
+        <h2>Удельные показатели и бенчмарк</h2>
+      </div>
+      <table>
+        <thead><tr>
+          <th>Показатель</th>
+          <th class="center">Оптимист.</th>
+          <th class="center">Базовый</th>
+          <th class="center">Консерват.</th>
+          <th class="center">Бенчмарк ЕС 2024</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td>€/кВт DC (установленной мощности)</td>
+            <td class="center">500</td>
+            <td class="center">700–800</td>
+            <td class="center">870</td>
+            <td class="center">600–900 €/кВт</td>
+          </tr>
+          <tr>
+            <td>€/кВт·ч годовой выработки</td>
+            <td class="center">≈ 0,39</td>
+            <td class="center">≈ 0,56–0,63</td>
+            <td class="center">≈ 0,69</td>
+            <td class="center">0,45–0,75</td>
+          </tr>
+          <tr>
+            <td>€/м² рабочей площади кровли</td>
+            <td class="center">≈ 89</td>
+            <td class="center">≈ 126–142</td>
+            <td class="center">≈ 155</td>
+            <td class="center">—</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout info">
+        <div class="callout-icon">i</div>
+        <div>Бенчмарк ЕС — по данным IRENA, SolarPower Europe и публичным отчётам EPC-компаний за 2024 год. Для Болгарии характерно значение в нижней трети европейского диапазона за счёт более низкой стоимости рабочей силы.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 7 — КЛЮЧЕВЫЕ НЕОПРЕДЕЛЁННОСТИ -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">7</div>
+        <h2>Ключевые неопределённости и следующие шаги</h2>
+      </div>
+      <table>
+        <thead><tr>
+          <th>#</th>
+          <th>Неопределённость</th>
+          <th class="right">Влияние на CAPEX</th>
+          <th>Как закрыть</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Стоимость подключения к сети (ТУ от EVN)</td><td class="right">±150–200 тыс. €</td><td>Подать заявку на ТУ в EVN Юг</td></tr>
+          <tr><td>2</td><td>Несущая способность кровли</td><td class="right">0–300 тыс. € (усиление)</td><td>Конструктивное обследование</td></tr>
+          <tr><td>3</td><td>Актуальные цены на модули</td><td class="right">±200–300 тыс. €</td><td>RFQ у 4–5 поставщиков</td></tr>
+          <tr><td>4</td><td>Выбор EPC-подрядчика</td><td class="right">±10–15% от СМР</td><td>Тендер среди 3–4 подрядчиков</td></tr>
+          <tr><td>5</td><td>НДС и таможенные пошлины</td><td class="right">НДС 20% (возврат)</td><td>Уточнить режим НДС для СЭС</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 8 — НДС И ФИНАНСИРОВАНИЕ -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">8</div>
+        <h2>НДС, субсидии и структура финансирования</h2>
+      </div>
+
+      <div class="subsection"><h3>НДС</h3></div>
+      <p class="section-lead">В Болгарии НДС составляет 20%. Для юридических лиц НДС возвратный, поэтому CAPEX указывается без НДС. Однако НДС создаёт кассовый разрыв на период строительства (~6–12 месяцев до возврата) — это учитывается в финансовой модели.</p>
+
+      <div class="subsection"><h3>Субсидии и льготные программы</h3></div>
+      <table>
+        <thead><tr><th>Программа</th><th>Характер поддержки</th><th>Примечание</th></tr></thead>
+        <tbody>
+          <tr><td>НПВУ (Recovery Plan Болгарии)</td><td>Гранты до 30–45% CAPEX для пром. потребителей</td><td>Конкурсный отбор, ограниченный бюджет</td></tr>
+          <tr><td>Фонды ЕС (ERDF / Cohesion)</td><td>Субсидии на энергоэффективность и ВИЭ</td><td>Через болгарские оперативные программы</td></tr>
+          <tr><td>Кредиты EIB / EBRD</td><td>Льготное финансирование под 2–4% годовых</td><td>Для проектов от 5 МВт</td></tr>
+        </tbody>
+      </table>
+      <div class="callout verify">
+        <div class="callout-icon">!</div>
+        <div><strong>К верификации:</strong> актуальные условия грантовых программ НПВУ — на сайте Министерства энергетики Болгарии. Возможный грант 30–45% от CAPEX кардинально меняет экономику проекта. Это приоритетный вопрос для проработки до принятия инвестиционного решения.</div>
+      </div>
+
+      <div class="subsection"><h3>Типовая структура финансирования (без гранта)</h3></div>
+      <table>
+        <thead><tr><th>Источник</th><th class="center">Доля</th><th class="center">Ставка</th></tr></thead>
+        <tbody>
+          <tr><td>Собственный капитал (equity)</td><td class="center">30–40%</td><td class="center">—</td></tr>
+          <tr><td>Банковский кредит</td><td class="center">60–70%</td><td class="center">5–8% годовых (EUR)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ИТОГОВЫЕ KPI -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">9</div>
+        <h2>Итоговые показатели CAPEX</h2>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card accent">
+          <div class="kpi-label">CAPEX базовый</div>
+          <div class="kpi-value">3,8–4,3</div>
+          <div class="kpi-unit">М€ (EPC под ключ)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Удельный CAPEX</div>
+          <div class="kpi-value">700–800</div>
+          <div class="kpi-unit">€/кВт DC</div>
+        </div>
+        <div class="kpi-card accent">
+          <div class="kpi-label">Доля оборудования</div>
+          <div class="kpi-value">60–65%</div>
+          <div class="kpi-unit">от общего CAPEX</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Диапазон сценариев</div>
+          <div class="kpi-value">2,7–4,7</div>
+          <div class="kpi-unit">М€</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="notes">
+      <div class="notes-title">Примечания</div>
+      <div class="note-item">
+        <div class="note-dot">1</div>
+        <span>Расчёт является предварительным (класс точности ±30%). Точный бюджет формируется после получения ТУ от EVN, конструктивного обследования кровли и коммерческих предложений поставщиков.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">2</div>
+        <span>Все цены указаны без НДС. НДС 20% возвратный для юридических лиц, но создаёт кассовый разрыв в период строительства.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">3</div>
+        <span>Источники ценовых данных: IRENA Renewable Power Generation Costs 2024, SolarPower Europe Market Outlook 2024–2025, публичные отчёты европейских EPC-компаний.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">4</div>
+        <span>Возможное усиление несущих конструкций кровли не включено в базовый расчёт. При необходимости — отдельная статья CAPEX, уточняется по результатам обследования.</span>
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <div class="doc-footer">
+    <div class="footer-source">Раздел: <span>CAPEX</span> &nbsp;·&nbsp; EPC-методология</div>
+    <div>Предварительный расчёт &nbsp;·&nbsp; 2025</div>
+  </div>
+
+</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TAB: OPEX
+============================================================ -->
+<div id="panel-opex" class="tab-panel">
+  <div class="tab-content-wrap">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="header-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M3 9h2M3 15h2M19 9h2M19 15h2"/>
+      </svg>
+      Предварительный расчёт
+    </div>
+    <h1>Эксплуатационные расходы (OPEX)</h1>
+    <p class="subtitle">Промышленная кровля &nbsp;·&nbsp; Бургас, Болгария &nbsp;·&nbsp; Горизонт 25 лет &nbsp;·&nbsp; Валюта: EUR</p>
+    <div class="meta-pills">
+      <div class="meta-pill">Мощность DC: <strong>5,4 МВт·п</strong></div>
+      <div class="meta-pill">Мощность AC: <strong>4,9 МВт</strong></div>
+      <div class="meta-pill">Выработка: <strong>6,8 – 7,0 ГВт·ч/год</strong></div>
+      <div class="meta-pill">CAPEX: <strong>3,8 – 4,3 М€</strong></div>
+      <div class="meta-pill">Кровля: <strong>собственность</strong></div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="doc-body">
+
+    <!-- SECTION 1 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">1</div>
+        <h2>Статьи OPEX — годовые расходы</h2>
+      </div>
+      <p class="section-lead">
+        Два сценария обслуживания рассчитаны параллельно. Статьи, не зависящие от модели обслуживания, приведены в объединённом столбце.
+      </p>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot dot-a"></div>Сценарий A — контракт с O&M-подрядчиком</div>
+        <div class="legend-item"><div class="legend-dot dot-b"></div>Сценарий B — собственная служба</div>
+        <div class="legend-item"><div class="legend-dot dot-c"></div>Общие статьи (не зависят от модели)</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width:34%">Статья</th>
+            <th style="width:18%">Основание</th>
+            <th style="width:22%">Сц. A: Подрядчик</th>
+            <th style="width:22%">Сц. B: Своя служба</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              O&M — техническое обслуживание
+              <div style="font-size:11px;color:var(--gray-700);margin-top:2px">Инспекции, плановые работы, мониторинг</div>
+            </td>
+            <td class="sub">9–12 €/кВт·п·год</td>
+            <td class="val">48 600 – 64 800 €</td>
+            <td class="val-teal">28 000 – 38 000 €</td>
+          </tr>
+          <tr>
+            <td>
+              Мойка панелей
+              <div style="font-size:11px;color:var(--gray-700);margin-top:2px">2–3 раза в год, механизированная</div>
+            </td>
+            <td class="sub">0,5–0,8 €/м²·год</td>
+            <td class="val">13 000 – 20 000 €</td>
+            <td class="val-teal">8 000 – 13 000 €</td>
+          </tr>
+          <tr>
+            <td>
+              Страхование имущества (All-risk)
+              <div style="font-size:11px;color:var(--gray-700);margin-top:2px">Панели, инверторы, конструкция, ответственность</div>
+            </td>
+            <td class="sub">0,3–0,5% CAPEX</td>
+            <td colspan="2" class="val" style="color:var(--blue-700)">11 400 – 21 500 € <span class="tag tag-c">Общие</span></td>
+          </tr>
+          <tr>
+            <td>
+              Мониторинг и SCADA / IT
+              <div style="font-size:11px;color:var(--gray-700);margin-top:2px">Платформа, SIM, сервер, кибербезопасность</div>
+            </td>
+            <td class="sub">—</td>
+            <td colspan="2" class="val" style="color:var(--blue-700)">4 000 – 6 000 € <span class="tag tag-c">Общие</span></td>
+          </tr>
+          <tr>
+            <td>
+              Административные расходы
+              <div style="font-size:11px;color:var(--gray-700);margin-top:2px">Аудит, юрист, бухгалтерия, лицензии</div>
+            </td>
+            <td class="sub">—</td>
+            <td colspan="2" class="val" style="color:var(--blue-700)">5 000 – 8 000 € <span class="tag tag-c">Общие</span></td>
+          </tr>
+          <tr>
+            <td>
+              Резерв на непредвиденные расходы
+              <div style="font-size:11px;color:var(--gray-700);margin-top:2px">~2–3% от прочих статей OPEX</div>
+            </td>
+            <td class="sub">2–3%</td>
+            <td class="val">1 600 – 2 400 €</td>
+            <td class="val-teal">1 200 – 2 000 €</td>
+          </tr>
+          <tr class="result-row">
+            <td><strong>ИТОГО OPEX (без замены инверторов)</strong></td>
+            <td></td>
+            <td class="val">~83 000 – 123 000 €</td>
+            <td class="val">~58 000 – 89 000 €</td>
+          </tr>
+          <tr class="result-teal">
+            <td><strong>Удельный OPEX на кВт·п</strong></td>
+            <td></td>
+            <td class="val">~15 – 23 €/кВт·п</td>
+            <td class="val">~11 – 16 €/кВт·п</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">2</div>
+        <h2>Структура годового OPEX — сценарий A (средние значения)</h2>
+      </div>
+      <p class="section-lead">Наибольшую долю занимает O&M-обслуживание (~51%). Страхование и мойка панелей — по ~15% каждая.</p>
+      <div class="bar-section">
+        <div class="bar-row">
+          <div class="bar-label">O&M обслуживание</div>
+          <div class="bar-track"><div class="bar-fill" style="width:51%"></div></div>
+          <div class="bar-val">~56 700 €</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Страхование</div>
+          <div class="bar-track"><div class="bar-fill teal" style="width:16%"></div></div>
+          <div class="bar-val">~16 500 €</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Мойка панелей</div>
+          <div class="bar-track"><div class="bar-fill light" style="width:16%"></div></div>
+          <div class="bar-val">~16 500 €</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Административные</div>
+          <div class="bar-track"><div class="bar-fill amber" style="width:7%"></div></div>
+          <div class="bar-val">~6 500 €</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Мониторинг / IT</div>
+          <div class="bar-track"><div class="bar-fill gray" style="width:5%"></div></div>
+          <div class="bar-val">~5 000 €</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Резерв</div>
+          <div class="bar-track"><div class="bar-fill gray" style="width:2%;opacity:0.5"></div></div>
+          <div class="bar-val">~2 000 €</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">3</div>
+        <h2>Капитальные замены — инверторы</h2>
+      </div>
+      <p class="section-lead">
+        Инверторы — единственная крупная статья капитальной замены в 25-летнем горизонте. Панели, конструкция и кабельная сеть замены не требуют.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Срок</th>
+            <th>Событие</th>
+            <th>Стоимость замены</th>
+            <th>Примечание</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Год ~11–12 <span class="milestone">замена 1</span></td>
+            <td>Полная замена инверторов</td>
+            <td class="val">130 000 – 200 000 €</td>
+            <td class="sub">~25–40 €/кВт AC · 4 900 кВт</td>
+          </tr>
+          <tr>
+            <td>Год ~22–24 <span class="milestone blue">замена 2</span></td>
+            <td>Полная замена инверторов</td>
+            <td class="val">100 000 – 160 000 €</td>
+            <td class="sub">С поправкой на снижение цен (−15–20%)</td>
+          </tr>
+          <tr class="result-row">
+            <td colspan="2"><strong>Суммарно за 25 лет (номинал)</strong></td>
+            <td class="val">230 000 – 360 000 €</td>
+            <td class="val">Резерв ~9 000 – 15 000 €/год</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">4</div>
+        <h2>Совокупный OPEX — горизонт 25 лет</h2>
+      </div>
+      <p class="section-lead">
+        Инфляция операционных затрат принята 2,5%/год. Замены инверторов — дискретные события. Значения в номинальных евро.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Период</th>
+            <th>OPEX без инверторов</th>
+            <th>Замена инверторов</th>
+            <th>Сц. A итого</th>
+            <th>Сц. B итого</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Год 1</td>
+            <td class="sub">83 000 – 123 000</td>
+            <td class="sub">—</td>
+            <td class="val">~103 000 €</td>
+            <td class="val-teal">~74 000 €</td>
+          </tr>
+          <tr>
+            <td>Год 5</td>
+            <td class="sub">~115 000</td>
+            <td class="sub">—</td>
+            <td class="val">~115 000 €</td>
+            <td class="val-teal">~82 000 €</td>
+          </tr>
+          <tr>
+            <td>Год 10</td>
+            <td class="sub">~130 000</td>
+            <td class="sub">—</td>
+            <td class="val">~130 000 €</td>
+            <td class="val-teal">~93 000 €</td>
+          </tr>
+          <tr>
+            <td>Год 11–12 <span class="milestone">инверторы</span></td>
+            <td class="sub">~135 000</td>
+            <td class="val-amber">130 – 200 К€</td>
+            <td class="val-amber">~285 000 – 335 000 €</td>
+            <td class="val-amber">~220 000 – 280 000 €</td>
+          </tr>
+          <tr>
+            <td>Год 20</td>
+            <td class="sub">~165 000</td>
+            <td class="sub">—</td>
+            <td class="val">~165 000 €</td>
+            <td class="val-teal">~118 000 €</td>
+          </tr>
+          <tr>
+            <td>Год 22–24 <span class="milestone blue">инверторы</span></td>
+            <td class="sub">~175 000</td>
+            <td class="val">100 – 160 К€</td>
+            <td class="val">~255 000 – 335 000 €</td>
+            <td class="val-teal">~190 000 – 275 000 €</td>
+          </tr>
+          <tr class="result-row">
+            <td><strong>ИТОГО 25 лет (номинал)</strong></td>
+            <td class="val">~3,1 – 3,6 М€</td>
+            <td class="val">~0,33 – 0,36 М€</td>
+            <td class="val">~3,4 – 4,0 М€</td>
+            <td class="val">~2,5 – 3,2 М€</td>
+          </tr>
+          <tr class="result-teal">
+            <td><strong>NPV (ставка дисконт. 6%)</strong></td>
+            <td></td>
+            <td></td>
+            <td class="val">~2,0 – 2,4 М€</td>
+            <td class="val">~1,5 – 1,9 М€</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">5</div>
+        <h2>Итоговые показатели</h2>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card accent">
+          <div class="kpi-label">OPEX год 1 · Сц. A</div>
+          <div class="kpi-value">83–123</div>
+          <div class="kpi-unit">К€/год · Подрядчик</div>
+        </div>
+        <div class="kpi-card teal">
+          <div class="kpi-label">OPEX год 1 · Сц. B</div>
+          <div class="kpi-value">58–89</div>
+          <div class="kpi-unit">К€/год · Своя служба</div>
+        </div>
+        <div class="kpi-card amber">
+          <div class="kpi-label">Экономия Сц. B vs A</div>
+          <div class="kpi-value">~25–35</div>
+          <div class="kpi-unit">К€/год · за 25 лет ~1 М€</div>
+        </div>
+      </div>
+      <div class="kpi-grid-2" style="margin-top:12px">
+        <div class="kpi-card">
+          <div class="kpi-label">OPEX / выработка · Сц. A</div>
+          <div class="kpi-value">14–18</div>
+          <div class="kpi-unit">€/МВт·ч · при 6 900 МВт·ч/год</div>
+        </div>
+        <div class="kpi-card teal">
+          <div class="kpi-label">OPEX / выработка · Сц. B</div>
+          <div class="kpi-value">10–13</div>
+          <div class="kpi-unit">€/МВт·ч · при 6 900 МВт·ч/год</div>
+        </div>
+      </div>
+      <div class="kpi-grid-2" style="margin-top:12px">
+        <div class="kpi-card amber">
+          <div class="kpi-label">Замены инверторов · 25 лет</div>
+          <div class="kpi-value">230–360</div>
+          <div class="kpi-unit">К€ · резерв ~10–15 К€/год</div>
+        </div>
+        <div class="kpi-card accent">
+          <div class="kpi-label">OPEX · 25 лет NPV (6%)</div>
+          <div class="kpi-value">1,5–2,4</div>
+          <div class="kpi-unit">М€ · в зависимости от сценария</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="notes">
+      <div class="notes-title">Рекомендации и примечания</div>
+      <div class="note-item">
+        <div class="note-dot">1</div>
+        <span><strong>Выбор модели O&M:</strong> при объёме 5,4 МВт собственная служба окупается с 3–4 года при наличии смежного персонала на предприятии. При отсутствии — предпочтителен контракт с опытным болгарским подрядчиком.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">2</div>
+        <span><strong>Страхование:</strong> запросите котировки у 2–3 страховщиков (Allianz, Groupama, локальные болгарские). Для промышленных кровель ставка обычно составляет 0,3–0,45% от CAPEX.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">3</div>
+        <span><strong>Замена инверторов:</strong> рекомендуется формировать ремонтный резервный фонд с года 1 (~10 000 €/год) — это сгладит пиковую нагрузку на денежный поток в год замены.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">4</div>
+        <span><strong>Инфляция O&M:</strong> в договорах с подрядчиком фиксируйте годовую индексацию ≤ CPI Болгарии (исторически 2,5–4%/год).</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">5</div>
+        <span><strong>Горизонт 10 лет:</strong> совокупный OPEX Сц. A ≈ 1,1–1,3 М€; Сц. B ≈ 0,8–1,0 М€ — без учёта замены инверторов.</span>
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-source">Источники: <span>SolarPower Europe O&M Best Practices</span> &nbsp;·&nbsp; Рыночные данные 2024–25</div>
+    <div>Предварительный расчёт &nbsp;·&nbsp; 2025</div>
+  </div>
+
+</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TAB: ФИНМОДЕЛЬ
+============================================================ -->
+<div id="panel-fin" class="tab-panel">
+  <div class="tab-content-wrap">
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="header-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <circle cx="12" cy="12" r="5"/>
+      </svg>
+      Предварительный расчёт · Equity
+    </div>
+    <h1>Финансовая модель СЭС</h1>
+    <p class="subtitle">Промышленная кровля &nbsp;·&nbsp; Бургас, Болгария &nbsp;·&nbsp; 100% самопотребление &nbsp;·&nbsp; Горизонт 25 лет</p>
+    <div class="meta-pills">
+      <div class="meta-pill">Мощность DC: <strong>5,4 МВт·п</strong></div>
+      <div class="meta-pill">Выработка г.1: <strong>6 900 МВт·ч</strong></div>
+      <div class="meta-pill">COD: <strong>2027</strong></div>
+      <div class="meta-pill">Дисконт: <strong>7% · Налог 10%</strong></div>
+    </div>
+  </div>
+
+  <!-- SCENARIO SWITCHER -->
+  <div class="scenario-bar">
+    <span class="scenario-label">Сценарий CAPEX:</span>
+    <button class="scen-btn active" onclick="setScenario('base', this)">Базовый · 4 050 К€</button>
+    <button class="scen-btn" onclick="setScenario('opt', this)">Оптимистичный · 3 800 К€</button>
+    <button class="scen-btn" onclick="setScenario('cons', this)">Консервативный · 4 300 К€</button>
+  </div>
+
+  <!-- BODY -->
+  <div class="doc-body">
+
+    <!-- SECTION 1: PARAMETERS -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">1</div>
+        <h2>Исходные параметры модели</h2>
+      </div>
+      <p class="section-lead">
+        Модель построена методом дисконтированного денежного потока (DCF) на горизонте 25 лет. Схема монетизации — 100% самопотребление: годовая экономия равна объёму замещённой сетевой электроэнергии, умноженному на действующий тариф промышленного потребителя.
+      </p>
+      <div class="params-2col">
+        <div class="param-block">
+          <div class="param-block-title">Энергетические</div>
+          <div class="param-row"><span class="param-key">Мощность DC</span><span class="param-val">5 400 кВт·п</span></div>
+          <div class="param-row"><span class="param-key">Мощность AC</span><span class="param-val">4 900 кВт</span></div>
+          <div class="param-row"><span class="param-key">Выработка год 1</span><span class="param-val">6 900 МВт·ч</span></div>
+          <div class="param-row"><span class="param-key">Деградация</span><span class="param-val">0,4% / год</span></div>
+          <div class="param-row"><span class="param-key">PR</span><span class="param-val">0,80</span></div>
+          <div class="param-row"><span class="param-key">COD</span><span class="param-val">2027</span></div>
+        </div>
+        <div class="param-block">
+          <div class="param-block-title">Тарифы и финансовые</div>
+          <div class="param-row"><span class="param-key">Тариф пром. г.1</span><span class="param-val">0,130 €/кВт·ч</span></div>
+          <div class="param-row"><span class="param-key">Рост тарифа</span><span class="param-val">2,5% / год</span></div>
+          <div class="param-row"><span class="param-key">Налог на прибыль</span><span class="param-val">10% (Болгария)</span></div>
+          <div class="param-row"><span class="param-key">Ставка дисконт.</span><span class="param-val">7% (equity)</span></div>
+          <div class="param-row"><span class="param-key">Амортизация</span><span class="param-val">линейная, 25 лет</span></div>
+          <div class="param-row"><span class="param-key">Финансирование</span><span class="param-val">100% equity</span></div>
+        </div>
+        <div class="param-block">
+          <div class="param-block-title">OPEX</div>
+          <div class="param-row"><span class="param-key">O&amp;M год 1</span><span class="param-val">103 К€ / год</span></div>
+          <div class="param-row"><span class="param-key">Инфляция O&amp;M</span><span class="param-val">2,5% / год</span></div>
+          <div class="param-row"><span class="param-key">Замена инверт. г.12</span><span class="param-val">165 К€</span></div>
+          <div class="param-row"><span class="param-key">Замена инверт. г.23</span><span class="param-val">130 К€</span></div>
+        </div>
+        <div class="param-block">
+          <div class="param-block-title">CAPEX по сценариям</div>
+          <div class="param-row"><span class="param-key">Базовый</span><span class="param-val">4 050 К€ · 750 €/кВт</span></div>
+          <div class="param-row"><span class="param-key">Оптимистичный</span><span class="param-val">3 800 К€ · 704 €/кВт</span></div>
+          <div class="param-row"><span class="param-key">Консервативный</span><span class="param-val">4 300 К€ · 796 €/кВт</span></div>
+          <div class="param-row"><span class="param-key">Источник тарифа</span><span class="param-val">Eurostat H2 2025</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: KEY METRICS -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">2</div>
+        <h2>Ключевые показатели эффективности</h2>
+      </div>
+      <p class="section-lead">Результаты DCF-модели для текущего сценария. Переключите сценарий CAPEX выше — все значения пересчитаются автоматически.</p>
+      <div class="kpi-grid" id="kpi-grid">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- SECTION 3: CASH FLOW CHART -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">3</div>
+        <h2>Кумулятивный денежный поток</h2>
+      </div>
+      <p class="section-lead">
+        Ось Y — кумулятивный NCF нарастающим итогом с учётом первоначального CAPEX. Пересечение нуля соответствует простому сроку окупаемости. Замены инверторов видны как локальные «просадки» кривой в годах 12 и 23.
+      </p>
+      <div class="chart-wrap">
+        <div class="chart-title">Кумулятивный NCF, К€ (без дисконтирования)</div>
+        <svg class="cf-chart" id="cf-svg" viewBox="0 0 820 190"></svg>
+      </div>
+    </div>
+
+    <!-- SECTION 4: CASH FLOW TABLE -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">4</div>
+        <h2>Детальный Cash Flow · 25 лет</h2>
+      </div>
+      <p class="section-lead">
+        Таблица денежного потока по всем 25 годам эксплуатации. Год 0 (CAPEX) — инвестиция в год ввода (2026/2027). Налог рассчитывается от EBIT; при отрицательном EBIT — 0.
+      </p>
+      <div style="overflow-x:auto; border-radius:10px; border:1px solid var(--gray-100);">
+        <table id="cf-table" style="border-radius:0; min-width:900px;"></table>
+      </div>
+    </div>
+
+    <!-- SECTION 5: SCENARIOS -->
+    <div class="section">
+      <div class="section-title">
+        <div class="section-num">5</div>
+        <h2>Сравнение сценариев</h2>
+      </div>
+      <p class="section-lead">Три сценария отличаются только величиной CAPEX. Все остальные параметры (тариф, OPEX, деградация, ставка дисконтирования) идентичны.</p>
+      <div class="scen-grid" id="scen-cards">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="notes">
+      <div class="notes-title">Примечания и допущения</div>
+      <div class="note-item">
+        <div class="note-dot">1</div>
+        <span>Тариф 0,130 €/кВт·ч — медианная оценка для крупного промышленного потребителя Болгарии на основе данных Eurostat H2 2025 (нежилые потребители, средний диапазон). Фактический тариф определяется после получения счёта от EVN/CEZ.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">2</div>
+        <span>100% самопотребление предполагает, что генерация СЭС полностью поглощается нагрузкой объекта. Если производство работает не круглосуточно, реальная доля самопотребления может быть ниже — необходим профиль нагрузки.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">3</div>
+        <span>NPV рассчитан по ставке 7% (equity-only, без заёмного финансирования). При добавлении проектного кредита WACC снизится, NPV возрастёт — модель будет уточнена после выбора структуры финансирования.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">4</div>
+        <span>Налог на прибыль Болгарии — 10% (корпоративный). Налоговая база: EBIT = Выручка − OPEX − Амортизация. Амортизация — линейная, 25 лет от величины CAPEX.</span>
+      </div>
+      <div class="note-item">
+        <div class="note-dot">5</div>
+        <span>Расчёт предварительный. Уточнение после: детального проектирования, получения КП от подрядчиков, аэрофотосъёмки кровли, получения ТУ на подключение.</span>
+      </div>
+    </div>
+
+  </div><!-- /doc-body -->
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-source">Тариф: <span>Eurostat H2 2025</span> &nbsp;·&nbsp; Инсоляция: <span>PVGIS (EC JRC)</span> &nbsp;·&nbsp; OPEX: опрос подрядчиков</div>
+    <div>Предварительный расчёт &nbsp;·&nbsp; 2026</div>
+  </div>
+
+</div><!-- /page -->
 
 <script>
-// ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК
-function switchMainTab(evt, tabId) {
-  const contents = document.getElementsByClassName("tab-content");
-  for (let i = 0; i < contents.length; i++) {
-    contents[i].classList.remove("active");
-  }
-  const buttons = document.getElementsByClassName("nav-btn");
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].classList.remove("active");
-  }
-  document.getElementById(tabId).classList.add("active");
-  evt.currentTarget.classList.add("active");
-
-  if (tabId === 'page-finmodel') {
-    updateFinModel();
-  }
-}
-
-// ДАННЫЕ И МАТЕМАТИКА МОДЕЛИ
+// ─── PARAMETERS ───────────────────────────────
 const P = {
   power_dc: 5400,
   gen1: 6900,
@@ -356,41 +2063,37 @@ const P = {
   inv2: { yr: 23, cost: 130 },
   tax: 0.10,
   disc: 0.07,
-  years: 25
+  years: 25,
+  cod: 2027,
 };
 
 const SCENARIOS = {
-  base: { capex: 4050, label: 'Базовый', cls: 'base' },
-  opt:  { capex: 3800, label: 'Оптимистичный', cls: 'opt' },
-  cons: { capex: 4300, label: 'Консервативный', cls: 'cons' }
+  base: { capex: 4050, label: 'Базовый',        cls: 'base' },
+  opt:  { capex: 3800, label: 'Оптимистичный',  cls: 'opt'  },
+  cons: { capex: 4300, label: 'Консервативный', cls: 'cons' },
 };
 
 let currentScenario = 'base';
 
+// ─── CASH FLOW ENGINE ─────────────────────────
 function buildCF(capex) {
   const rows = [];
   const deprAnnual = capex / P.years;
-  let cumDiscounted = -capex;
-  let dpb = null;
 
   for (let y = 1; y <= P.years; y++) {
     const gen_mwh = P.gen1 * Math.pow(1 - P.degrad, y - 1);
     const tariff  = P.tariff1 * Math.pow(1 + P.tariff_growth, y - 1);
-    const revenue = gen_mwh * 1000 * tariff / 1000; 
+    const revenue = gen_mwh * 1000 * tariff / 1000; // K€
 
     let opex_om = P.opex1 * Math.pow(1 + P.opex_inf, y - 1);
-    if (y === P.inv1.yr) opex_om += P.inv1.cost;
-    if (y === P.inv2.yr) opex_om += P.inv2.cost;
+    let inv_cap = 0;
+    if (y === P.inv1.yr) { opex_om += P.inv1.cost; inv_cap = P.inv1.cost; }
+    if (y === P.inv2.yr) { opex_om += P.inv2.cost; inv_cap = P.inv2.cost; }
 
     const ebit = revenue - opex_om - deprAnnual;
     const tax  = ebit > 0 ? ebit * P.tax : 0;
     const ncf  = revenue - opex_om - tax;
-
-    const discountedNcf = ncf / Math.pow(1 + P.disc, y);
-    cumDiscounted += discountedNcf;
-    if (dpb === null && cumDiscounted >= 0) dpb = y;
-
-    rows.push({ y, gen_mwh, tariff, revenue, opex: opex_om, ebit, tax, ncf });
+    rows.push({ y, gen_mwh, tariff, revenue, opex: opex_om, inv_cap, ebit, tax, ncf });
   }
 
   let cum = -capex;
@@ -404,7 +2107,8 @@ function buildCF(capex) {
     for (let i = 0; i < 200; i++) {
       let v = 0, dv = 0;
       flows.forEach((f, j) => { v += f / Math.pow(1+rate,j); dv -= j*f/Math.pow(1+rate,j+1); });
-      const step = v / dv; rate -= step;
+      const step = v / dv;
+      rate -= step;
       if (Math.abs(step) < 1e-9) break;
     }
     return rate;
@@ -414,24 +2118,216 @@ function buildCF(capex) {
   let pb = null;
   rows.forEach(r => { if (pb === null && r.cum >= 0) pb = r.y; });
 
-  return { rows, npv, irrVal, pb, dpb };
+  const totalRev = rows.reduce((s,r) => s + r.revenue, 0);
+  const totalGen = rows.reduce((s,r) => s + r.gen_mwh, 0);
+
+  return { rows, npv, irrVal, pb, totalRev, totalGen };
 }
 
+// ─── FORMAT ───────────────────────────────────
 function f(v, d=0) { return v.toLocaleString('ru-RU', {minimumFractionDigits:d,maximumFractionDigits:d}); }
+function fSign(v, d=1) { return (v>=0?'+':'')+f(v,d); }
 
+// ─── KPI GRID ─────────────────────────────────
 function renderKpis(cf) {
   document.getElementById('kpi-grid').innerHTML = `
-    <div class="kpi-card accent"><div class="kpi-label">NPV (Ставка 7%)</div><div class="kpi-value">${f(cf.npv,0)} К€</div><div class="kpi-unit">Чистый прив. доход</div></div>
-    <div class="kpi-card accent"><div class="kpi-label">IRR (Рентабельность)</div><div class="kpi-value">${f(cf.irrVal*100,1)}%</div><div class="kpi-unit">Внутренняя норма</div></div>
-    <div class="kpi-card teal"><div class="kpi-label">Простой Payback</div><div class="kpi-value">${cf.pb ? cf.pb : '>25'} лет</div><div class="kpi-unit">Без дисконтирования</div></div>
-    <div class="kpi-card teal"><div class="kpi-label">Дисконтир. Payback</div><div class="kpi-value">${cf.dpb ? cf.dpb : '>25'} лет</div><div class="kpi-unit">С учетом WACC</div></div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">NPV (7%)</div>
+      <div class="kpi-value">${f(cf.npv,0)}</div>
+      <div class="kpi-unit">К€ · чист. прив. стоимость</div>
+    </div>
+    <div class="kpi-card accent">
+      <div class="kpi-label">IRR</div>
+      <div class="kpi-value">${f(cf.irrVal*100,1)}%</div>
+      <div class="kpi-unit">внутр. норма доходности</div>
+    </div>
+    <div class="kpi-card teal">
+      <div class="kpi-label">Срок окупаемости</div>
+      <div class="kpi-value">${cf.pb ? cf.pb : '>25'}</div>
+      <div class="kpi-unit">лет · простой (undiscounted)</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Выручка 25 лет</div>
+      <div class="kpi-value">${f(cf.totalRev/1000,2)}</div>
+      <div class="kpi-unit">М€ · ${f(cf.totalGen/1000,1)} ГВт·ч</div>
+    </div>
   `;
 }
 
-function renderTable(rows) {
+// ─── TABLE ────────────────────────────────────
+function renderTable(rows, capex) {
   const yrs = Array.from({length:25},(_,i)=>i+1);
-  let hdr = `<thead><tr><th>Статья, К€</th>` + yrs.map(y => `<th>Г${y}</th>`).join('') + `</tr></thead>`;
-  let body = '<tbody>';
+  const total = key => rows.reduce((s,r)=>s+r[key],0);
 
-  body += `<tr><td>Экономия на закупке э/э</td>` + rows.map(r => `<td class="val pos">${f(r.revenue,0)}</td>`).join('') + `</tr>`;
-  body += `<tr><td>Операционные расходы (OPEX)</td>` + rows.map(
+  let hdr = `<thead><tr><th style="text-align:left;min-width:200px">Показатель</th>`;
+  yrs.forEach(y => {
+    hdr += `<th style="min-width:68px">${P.cod+y-1}<br><small style="font-weight:400;opacity:.7">Г${y}</small></th>`;
+  });
+  hdr += `<th>Итого</th></tr></thead>`;
+
+  function row(label, fmt, totFn, cls='', rowCls='') {
+    let r = `<tr class="${rowCls}"><td>${label}</td>`;
+    yrs.forEach(y => { r += `<td class="${cls}">${fmt(rows[y-1])}</td>`; });
+    r += `<td class="${cls}">${totFn()}</td></tr>`;
+    return r;
+  }
+  function secRow(label) {
+    return `<tr class="section-row"><td colspan="${yrs.length+2}">${label}</td></tr>`;
+  }
+
+  let body = '<tbody>';
+  body += secRow('Генерация и тариф');
+  body += row('Выработка, МВт·ч', r=>f(r.gen_mwh,0), ()=>f(total('gen_mwh'),0));
+  body += row('Тариф, €/кВт·ч', r=>(r.tariff*100).toFixed(2)+'¢', ()=>'—');
+  body += secRow('Доходы');
+  body += row('Экономия на э/э, К€', r=>f(r.revenue,1), ()=>f(total('revenue'),1), 'pos');
+  body += secRow('Расходы');
+  body += row('O&M (OPEX), К€', r=>f(r.opex,1), ()=>f(total('opex'),1), 'neg');
+  body += row('Налог на прибыль, К€', r=>f(r.tax,1), ()=>f(total('tax'),1), 'neg');
+  body += secRow('Результат');
+  body += row('NCF чист. ден. поток, К€', r=>f(r.ncf,1), ()=>f(total('ncf'),1), '', 'ncf-row');
+  body += `<tr class="cum-row"><td>Кум. поток (вкл. CAPEX), К€</td>`;
+  yrs.forEach(y => {
+    const v = rows[y-1].cum;
+    body += `<td class="${v<0?'neg':'pos'}">${f(v,0)}</td>`;
+  });
+  body += `<td class="${rows[24].cum>=0?'pos':'neg'}">${f(rows[24].cum,0)}</td></tr>`;
+  body += secRow('CAPEX');
+  body += `<tr class="capex-row"><td>CAPEX инвестиции, К€</td>`;
+  yrs.forEach(() => { body += `<td>—</td>`; });
+  body += `<td class="neg">−${f(capex,0)}</td></tr>`;
+  body += '</tbody>';
+
+  document.getElementById('cf-table').innerHTML = hdr + body;
+}
+
+// ─── CHART ────────────────────────────────────
+function renderChart(rows, capex) {
+  const svg = document.getElementById('cf-svg');
+  const W=820, H=190, pL=58, pR=18, pT=16, pB=32;
+  const cw = W-pL-pR, ch = H-pT-pB;
+
+  const cumVals = [-capex, ...rows.map(r=>r.cum)];
+  const minV = Math.min(...cumVals);
+  const maxV = Math.max(...cumVals);
+  const rng = maxV - minV || 1;
+
+  const sx = i => pL + (i/(cumVals.length-1))*cw;
+  const sy = v => pT + ch - ((v-minV)/rng)*ch;
+  const zY = sy(0);
+
+  let out = '';
+
+  // grid
+  [0,1,2,3,4].forEach(i => {
+    const v = minV + rng*i/4;
+    const y = sy(v);
+    out += `<line x1="${pL}" y1="${y}" x2="${W-pR}" y2="${y}" stroke="#D3D1C7" stroke-width="0.8"/>`;
+    out += `<text x="${pL-5}" y="${y+4}" text-anchor="end" font-size="9" fill="#5F5E5A">${f(v/1000,1)}М</text>`;
+  });
+
+  // zero line
+  out += `<line x1="${pL}" y1="${zY}" x2="${W-pR}" y2="${zY}" stroke="#185FA5" stroke-width="1.2" stroke-dasharray="5,4" opacity="0.5"/>`;
+
+  // negative fill
+  const negPath = cumVals.map((v,i)=>`${i===0?'M':'L'}${sx(i)},${sy(Math.min(v,0))}`).join(' ');
+  out += `<path d="${negPath} L${sx(cumVals.length-1)},${zY} L${sx(0)},${zY} Z" fill="#FEE2E2" opacity="0.7"/>`;
+
+  // positive fill
+  const posPts = cumVals.map((v,i)=>`${sx(i)},${sy(Math.max(v,0))}`).join(' ');
+  out += `<polygon points="${sx(0)},${zY} ${posPts} ${sx(cumVals.length-1)},${zY}" fill="#D1FAE5" opacity="0.7"/>`;
+
+  // line
+  const pts = cumVals.map((v,i)=>`${sx(i)},${sy(v)}`).join(' ');
+  out += `<polyline points="${pts}" fill="none" stroke="#185FA5" stroke-width="2.2" stroke-linejoin="round"/>`;
+
+  // key dots
+  [[0,'#9B1C1C'],[12,'#854F0B'],[23,'#854F0B']].forEach(([i,c]) => {
+    if(i < cumVals.length) out += `<circle cx="${sx(i)}" cy="${sy(cumVals[i])}" r="4" fill="${c}" stroke="white" stroke-width="1.5"/>`;
+  });
+  // payback dot
+  let pbIdx = cumVals.findIndex((v,i)=>i>0&&v>=0);
+  if(pbIdx>0) {
+    out += `<circle cx="${sx(pbIdx)}" cy="${sy(cumVals[pbIdx])}" r="4" fill="#0F6E56" stroke="white" stroke-width="1.5"/>`;
+    out += `<line x1="${sx(pbIdx)}" y1="${pT}" x2="${sx(pbIdx)}" y2="${H-pB}" stroke="#0F6E56" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.7"/>`;
+    out += `<text x="${sx(pbIdx)+5}" y="${pT+12}" font-size="9.5" fill="#0F6E56" font-weight="600">Окупаемость</text>`;
+  }
+
+  // year labels
+  [0,5,10,15,20,25].forEach(y => {
+    const i = y;
+    if(i < cumVals.length) {
+      out += `<text x="${sx(i)}" y="${H-pB+14}" text-anchor="middle" font-size="9" fill="#5F5E5A">${y===0?'CAPEX':'Г'+y}</text>`;
+    }
+  });
+
+  svg.innerHTML = out;
+}
+
+// ─── SCENARIO CARDS ───────────────────────────
+function renderScenCards() {
+  const keys = ['opt','base','cons'];
+  document.getElementById('scen-cards').innerHTML = keys.map(k => {
+    const s = SCENARIOS[k];
+    const cf = buildCF(s.capex);
+    const act = k === currentScenario ? 'style="outline:2px solid #185FA5;outline-offset:2px;"' : '';
+    return `<div class="scen-card ${s.cls}" ${act}>
+      <div class="scen-name">${s.label}</div>
+      <div class="scen-capex">${f(s.capex)} К€</div>
+      <div class="scen-detail">
+        IRR: <span>${f(cf.irrVal*100,1)}%</span><br>
+        NPV: <span>${f(cf.npv,0)} К€</span><br>
+        Payback: <span>${cf.pb ? cf.pb+' лет' : '>25 лет'}</span><br>
+        Уд. CAPEX: <span>${f(Math.round(s.capex*1000/P.power_dc))} €/кВт</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── MAIN UPDATE ──────────────────────────────
+function update() {
+  const capex = SCENARIOS[currentScenario].capex;
+  const cf = buildCF(capex);
+  renderKpis(cf);
+  renderTable(cf.rows, capex);
+  renderChart(cf.rows, capex);
+  renderScenCards();
+}
+
+function setScenario(key, btn) {
+  currentScenario = key;
+  document.querySelectorAll('.scen-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  update();
+}
+
+update();
+</script>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAVIGATION SCRIPT
+============================================================ -->
+<script>
+function switchToTab(id) {
+  var btn = document.querySelector('.nav-tab[data-tab="' + id + '"]');
+  showTab(id, btn);
+}
+
+function showTab(id, btn) {
+  // Hide all panels
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  // Deactivate all tabs
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  // Show target panel
+  document.getElementById('panel-' + id).classList.add('active');
+  // Activate button
+  if (btn) btn.classList.add('active');
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
