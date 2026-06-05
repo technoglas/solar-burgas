@@ -6,7 +6,7 @@
 <title>ТЭО СЭС Бургас — Интегрированный отчет</title>
 <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* ─── ОБЩИЕ СТИЛИ ИНТЕРФЕЙСА INDEX.HTML ─────────────────── */
+  /* ─── ОБЩИЕ СТИЛИ ИНТЕРФЕЙСА ─────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --blue-900: #042C53;
@@ -52,7 +52,7 @@
     overflow: hidden;
   }
   
-  /* ГЛАВНОЕ МЕНЮ (5 ВКЛАДОК) */
+  /* ГЛАВНОЕ МЕНЮ */
   .main-nav {
     display: flex;
     background: var(--blue-900);
@@ -83,7 +83,7 @@
     border-bottom-color: var(--white);
   }
 
-  /* КОНТЕНТ ВКЛАДОК */
+  /* КОНТЕНТ ВКЛАДОК (ОСНОВНОЙ КЛАСС ДЛЯ ПЕРЕКЛЮЧЕНИЯ) */
   .tab-content {
     display: none;
     padding: 40px;
@@ -92,7 +92,7 @@
     display: block;
   }
 
-  /* ТИПОГРАФИКА И БЛОКИ ИЗ ВЛОЖЕННЫХ ФАЙЛОВ */
+  /* ТИПОГРАФИКА И ОФОРМЛЕНИЕ */
   .doc-header {
     margin-bottom: 30px;
     padding-bottom: 20px;
@@ -136,11 +136,10 @@
 
   /* ПРИМЕЧАНИЯ */
   .notes { background: var(--gray-50); padding: 16px 20px; border-radius: 8px; margin-top: 25px; border-left: 4px solid var(--gray-300); }
-  .notes-title { font-weight: 600; margin-bottom: 8px; color: var(--gray-900); }
   .note-item { display: flex; gap: 8px; font-size: 12.5px; color: var(--gray-700); margin-bottom: 6px; }
   .note-dot { background: var(--blue-100); color: var(--blue-900); width: 16px; height: 16px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; flex-shrink: 0; margin-top: 2px; }
 
-  /* СПЕЦИФИКА ДЛЯ ТАБА 5 (ФИНАНСОВАЯ МОДЕЛЬ) */
+  /* СПЕЦИФИКА ФИНАНСОВОЙ МОДЕЛИ */
   .scenario-bar { background: var(--blue-50); padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
   .scen-btn { background: var(--white); border: 1.5px solid var(--blue-100); border-radius: 6px; padding: 6px 14px; font-family: var(--font); font-size: 13px; font-weight: 500; color: var(--blue-700); cursor: pointer; }
   .scen-btn.active { background: var(--blue-800); border-color: var(--blue-800); color: var(--white); }
@@ -155,7 +154,6 @@
   .chart-wrap { background: var(--gray-50); border: 1px solid var(--gray-100); border-radius: 8px; padding: 16px; margin-top: 15px; }
   svg.cf-chart { width: 100%; height: 180px; display: block; overflow: visible; }
   tr.ncf-row td { background: var(--teal-50) !important; font-weight: 600; color: var(--teal-600); }
-  tr.capex-row td { background: var(--red-50) !important; color: var(--red-600); }
   .neg { color: var(--red-600); font-weight: 500; }
   .pos { color: var(--teal-600); font-weight: 500; }
 </style>
@@ -178,18 +176,12 @@
       <p class="subtitle">Концептуальные основы, базовые ограничения проекта и ключевые допущения</p>
     </div>
     
-    <div class="section-title">
-      <div class="section-num">!</div>
-      <h2>Статус документа и назначение расчетов</h2>
-    </div>
+    <div class="section-title"><div class="section-num">!</div><h2>Статус документа и назначение расчетов</h2></div>
     <p>Настоящий интерактивный отчет объединяет технические, инвестиционные и эксплуатационные параметры планируемой к строительству крышной солнечной электростанции (СЭС) проектной мощностью <strong>5,4 МВт·п (DC)</strong> в г. Бургас, Болгария.</p>
     <br>
     <p>Цель интеграции — предоставить сквозной анализ влияния инженерных решений (выработка, деградация панелей), инвестиционной структуры (базовый, оптимистичный и консервативный CAPEX) и структуры сервисных контрактов (OPEX) на итоговую окупаемость капитала.</p>
 
-    <div class="section-title">
-      <div class="section-num">A</div>
-      <h2>Фундаментальные макроэкономические допущения</h2>
-    </div>
+    <div class="section-title"><div class="section-num">A</div><h2>Фундаментальные макроэкономические допущения</h2></div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -205,14 +197,10 @@
       </table>
     </div>
 
-    <div class="section-title">
-      <div class="section-num">B</div>
-      <h2>Ключевые технологические рамки</h2>
-    </div>
-    <p>Все последующие расчеты во вкладках 2-5 жестко опираются на конфигурацию оборудования "Tier-1 панели + промышленные стринговые инверторы" со следующими граничными условиями:</p>
-    <div class="notes" style="margin-top:15px;">
-      <div class="note-item"><div class="note-dot">1</div><span><strong>Схема монетизации:</strong> 100% самопотребление (замещение собственной закупки из сети). Продажа излишков в сеть в базовой конфигурации заблокирована.</span></div>
-      <div class="note-item"><div class="note-dot">2</div><span><strong>Срок полезного использования проекта:</strong> 25 лет. Амортизация активов рассчитывается линейным методом исходя из этого срока.</span></div>
+    <div class="section-title"><div class="section-num">B</div><h2>Ключевые технологические рамки</h2></div>
+    <div class="notes">
+      <div class="note-item"><div class="note-dot">1</div><span><strong>Схема монетизации:</strong> 100% самопотребление (замещение собственной закупки из сети). Продажа излишков заблокирована.</span></div>
+      <div class="note-item"><div class="note-dot">2</div><span><strong>Срок полезного использования проекта:</strong> 25 лет. Амортизация активов рассчитывается линейным методом.</span></div>
       <div class="note-item"><div class="note-dot">3</div><span><strong>Техническое старение:</strong> Коэффициент деградации производительности фотоэлектрических модулей принят на уровне 0,4% в год.</span></div>
     </div>
   </div>
@@ -224,4 +212,226 @@
     </div>
     
     <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-
+      <div class="kpi-card"><div class="kpi-label">Мощность массива DC</div><div class="kpi-value">5 400</div><div class="kpi-unit">кВт·п</div></div>
+      <div class="kpi-card"><div class="kpi-label">Генерация, Год 1</div><div class="kpi-value">6 900</div><div class="kpi-unit">МВт·ч / год</div></div>
+      <div class="kpi-card"><div class="kpi-label">Удельная выработка</div><div class="kpi-value">1 264</div><div class="kpi-unit">кВт·ч / кВт·п / год</div></div>
+    </div>
+
+    <div class="section-title"><div class="section-num">1</div><h2>Помесячное распределение генерации</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Месяц</th><th>Инсоляция (кВт·ч/м²)</th><th class="val">Выработка СЭС (МВт·ч)</th><th>Доля в годовом объеме</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Январь</td><td>48,2</td><td class="val">198</td><td>2,9%</td></tr>
+          <tr><td>Февраль</td><td>62,1</td><td class="val">245</td><td>3,6%</td></tr>
+          <tr><td>Март</td><td>104,5</td><td class="val">422</td><td>6,1%</td></tr>
+          <tr><td>Апрель</td><td>142,0</td><td class="val">580</td><td>8,4%</td></tr>
+          <tr><td>Май</td><td>185,4</td><td class="val">792</td><td>11,5%</td></tr>
+          <tr><td>Июнь</td><td>210,8</td><td class="val">885</td><td>12,8%</td></tr>
+          <tr><td>Июль</td><td>224,1</td><td class="val">932</td><td>13,5%</td></tr>
+          <tr><td>Август</td><td>198,6</td><td class="val">846</td><td>12,3%</td></tr>
+          <tr><td>Сентябрь</td><td>138,5</td><td class="val">572</td><td>8,3%</td></tr>
+          <tr><td>Октябрь</td><td>92,4</td><td class="val">394</td><td>5,7%</td></tr>
+          <tr><td>Ноябрь</td><td>52,1</td><td class="val">215</td><td>3,1%</td></tr>
+          <tr><td>Декабрь</td><td>38,4</td><td class="val">161</td><td>2,3%</td></tr>
+          <tr style="font-weight:600; background:var(--blue-50);"><td>Итого за год</td><td>1 497,2</td><td class="val">6 900</td><td>100,0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="page-capex" class="tab-content">
+    <div class="doc-header">
+      <h1>Инвестиционный бюджет проекта (CAPEX)</h1>
+      <p class="subtitle">Структурирование единовременных капитальных вложений по технологическим пакетам</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Статья инвестиций</th><th>Описание компонентов</th><th class="val">Сумма, К€</th><th>Доля в бюджете</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PV-модули (Tier-1)</td><td>N-type TOPCon, 600W+, высокая эффективность</td><td class="val">1 420</td><td>35,1%</td></tr>
+          <tr><td>Инверторное оборудование</td><td>Промышленные стринговые инверторы 250 кВт, AC-щиты</td><td class="val">445</td><td>11,0%</td></tr>
+          <tr><td>Опорные металлоконструкции</td><td>Алюминиевые балластные/кляймерные системы для кровли</td><td class="val">520</td><td>12,8%</td></tr>
+          <tr><td>DC/AC кабельная сеть и BoS</td><td>Кабели, лотки, заземление, коннекторы, шкафы сбора</td><td class="val">360</td><td>8,9%</td></tr>
+          <tr><td>Трансформаторная подстанция</td><td>КТП 0,4/20 кВ, ячейки, учет, интеграция с ГРЩ завода</td><td class="val">290</td><td>7,2%</td></tr>
+          <tr><td>Строительно-монтажные работы</td><td>Монтаж конструкций, панелей, прокладка кабелей</td><td class="val">410</td><td>10,1%</td></tr>
+          <tr><td>Проектирование и девелопмент</td><td>Инженерные изыскания, ТЭО, согласования, надзор</td><td class="val">130</td><td>3,2%</td></tr>
+          <tr><td>Непредвиденные расходы (5%)</td><td>Резерв на изменение цен, логистику, доп. работы</td><td class="val">205</td><td>5,1%</td></tr>
+          <tr style="font-weight:600; background:var(--blue-800); color:var(--white);"><td>Всего (Базовый CAPEX)</td><td>Удельная стоимость: ~750 €/кВт·п</td><td class="val">4 050</td><td>100,0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="page-opex" class="tab-content">
+    <div class="doc-header">
+      <h1>Операционные расходы (OPEX)</h1>
+      <p class="subtitle">Ежегодные затраты на эксплуатацию и содержание СЭС</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Компонент OPEX</th><th>Регулярность / База расчета</th><th class="val">Сценарий А (Внешний EPC), К€/год</th><th class="val">Сценарий Б (Свой штат), К€/год</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Техническое обслуживание (O&M)</td><td>Мониторинг, регламентный осмотр, протяжка контактов</td><td class="val">48,0</td><td class="val">28,0</td></tr>
+          <tr><td>Очистка и мытье панелей</td><td>2 раза в год (роботизированная / ручная мойка)</td><td class="val">22,0</td><td class="val">16,0</td></tr>
+          <tr><td>Страхование (Allianz / Groupama)</td><td>0,35% от базовой стоимости CAPEX (All-Risks)</td><td class="val">14,2</td><td class="val">14,2</td></tr>
+          <tr><td>Диспетчеризация и безопасность</td><td>Круглосуточный удаленный пульт, охрана периметра</td><td class="val">12,0</td><td class="val">6,0</td></tr>
+          <tr><td>Администрирование и аренда каналов</td><td>Лицензии на ПО мониторинга, отчетность перед АУЭ</td><td class="val">6,8</td><td class="val">3,8</td></tr>
+          <tr style="font-weight:600; background:var(--blue-50);"><td>Итого OPEX (Год 1)</td><td>Удельный OPEX: 14–19 €/кВт/год</td><td class="val">103,0</td><td class="val">68,0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:13px; color:var(--gray-700); margin-top:8px;">* В расчетах финансовой модели (вкладка 5) консервативно используется Сценарий А (103 К€/год) с последующей ежегодной инфляцией 2,5%.</p>
+  </div>
+
+  <div id="page-finmodel" class="tab-content">
+    <div class="doc-header">
+      <h1>Интерактивная финансовая модель</h1>
+      <p class="subtitle">Расчет дисконтированных потоков (DCF), инвестиционных сценариев и графиков окупаемости</p>
+    </div>
+
+    <div class="scenario-bar">
+      <span style="font-size:12px; font-weight:600; color:var(--gray-700); text-transform:uppercase;">Выбор сценария инвестиций:</span>
+      <button class="scen-btn active" id="btn-scen-base" onclick="setScenario('base')">Базовый · 4 050 К€</button>
+      <button class="scen-btn" id="btn-scen-opt" onclick="setScenario('opt')">Оптимистичный · 3 800 К€</button>
+      <button class="scen-btn" id="btn-scen-cons" onclick="setScenario('cons')">Консервативный · 4 300 К€</button>
+    </div>
+
+    <div class="kpi-grid" id="kpi-grid"></div>
+
+    <div class="section-title"><div class="section-num">3.1</div><h2>Кумулятивный денежный поток</h2></div>
+    <div class="chart-wrap">
+      <div style="font-size:12px; font-weight:500; color:var(--gray-700); margin-bottom:10px; text-transform:uppercase;">Кумулятивный NCF нарастающим итогом, К€</div>
+      <svg class="cf-chart" id="cf-svg" viewBox="0 0 820 190"></svg>
+    </div>
+
+    <div class="section-title"><div class="section-num">3.2</div><h2>Прогноз движения денежных средств (Cash Flow), К€</h2></div>
+    <div class="table-wrap">
+      <table id="cf-table"></table>
+    </div>
+
+    <div class="section-title"><div class="section-num">3.3</div><h2>Сравнительный анализ отклонений</h2></div>
+    <div class="scen-grid" id="scen-cards"></div>
+  </div>
+
+</div>
+
+<script>
+// ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ВКЛАДОК
+function switchMainTab(evt, tabId) {
+  const contents = document.getElementsByClassName("tab-content");
+  for (let i = 0; i < contents.length; i++) {
+    contents[i].classList.remove("active");
+  }
+  const buttons = document.getElementsByClassName("nav-btn");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove("active");
+  }
+  document.getElementById(tabId).classList.add("active");
+  evt.currentTarget.classList.add("active");
+
+  if (tabId === 'page-finmodel') {
+    updateFinModel();
+  }
+}
+
+// ДАННЫЕ И МАТЕМАТИКА МОДЕЛИ
+const P = {
+  power_dc: 5400,
+  gen1: 6900,
+  degrad: 0.004,
+  tariff1: 0.130,
+  tariff_growth: 0.025,
+  opex1: 103,
+  opex_inf: 0.025,
+  inv1: { yr: 12, cost: 165 },
+  inv2: { yr: 23, cost: 130 },
+  tax: 0.10,
+  disc: 0.07,
+  years: 25
+};
+
+const SCENARIOS = {
+  base: { capex: 4050, label: 'Базовый', cls: 'base' },
+  opt:  { capex: 3800, label: 'Оптимистичный', cls: 'opt' },
+  cons: { capex: 4300, label: 'Консервативный', cls: 'cons' }
+};
+
+let currentScenario = 'base';
+
+function buildCF(capex) {
+  const rows = [];
+  const deprAnnual = capex / P.years;
+  let cumDiscounted = -capex;
+  let dpb = null;
+
+  for (let y = 1; y <= P.years; y++) {
+    const gen_mwh = P.gen1 * Math.pow(1 - P.degrad, y - 1);
+    const tariff  = P.tariff1 * Math.pow(1 + P.tariff_growth, y - 1);
+    const revenue = gen_mwh * 1000 * tariff / 1000; 
+
+    let opex_om = P.opex1 * Math.pow(1 + P.opex_inf, y - 1);
+    if (y === P.inv1.yr) opex_om += P.inv1.cost;
+    if (y === P.inv2.yr) opex_om += P.inv2.cost;
+
+    const ebit = revenue - opex_om - deprAnnual;
+    const tax  = ebit > 0 ? ebit * P.tax : 0;
+    const ncf  = revenue - opex_om - tax;
+
+    const discountedNcf = ncf / Math.pow(1 + P.disc, y);
+    cumDiscounted += discountedNcf;
+    if (dpb === null && cumDiscounted >= 0) dpb = y;
+
+    rows.push({ y, gen_mwh, tariff, revenue, opex: opex_om, ebit, tax, ncf });
+  }
+
+  let cum = -capex;
+  rows.forEach(r => { cum += r.ncf; r.cum = cum; });
+
+  let npv = -capex;
+  rows.forEach((r, i) => { npv += r.ncf / Math.pow(1 + P.disc, i + 1); });
+
+  function irr(flows) {
+    let rate = 0.12;
+    for (let i = 0; i < 200; i++) {
+      let v = 0, dv = 0;
+      flows.forEach((f, j) => { v += f / Math.pow(1+rate,j); dv -= j*f/Math.pow(1+rate,j+1); });
+      const step = v / dv; rate -= step;
+      if (Math.abs(step) < 1e-9) break;
+    }
+    return rate;
+  }
+  const irrVal = irr([-capex, ...rows.map(r => r.ncf)]);
+
+  let pb = null;
+  rows.forEach(r => { if (pb === null && r.cum >= 0) pb = r.y; });
+
+  return { rows, npv, irrVal, pb, dpb };
+}
+
+function f(v, d=0) { return v.toLocaleString('ru-RU', {minimumFractionDigits:d,maximumFractionDigits:d}); }
+
+function renderKpis(cf) {
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card accent"><div class="kpi-label">NPV (Ставка 7%)</div><div class="kpi-value">${f(cf.npv,0)} К€</div><div class="kpi-unit">Чистый прив. доход</div></div>
+    <div class="kpi-card accent"><div class="kpi-label">IRR (Рентабельность)</div><div class="kpi-value">${f(cf.irrVal*100,1)}%</div><div class="kpi-unit">Внутренняя норма</div></div>
+    <div class="kpi-card teal"><div class="kpi-label">Простой Payback</div><div class="kpi-value">${cf.pb ? cf.pb : '>25'} лет</div><div class="kpi-unit">Без дисконтирования</div></div>
+    <div class="kpi-card teal"><div class="kpi-label">Дисконтир. Payback</div><div class="kpi-value">${cf.dpb ? cf.dpb : '>25'} лет</div><div class="kpi-unit">С учетом WACC</div></div>
+  `;
+}
+
+function renderTable(rows) {
+  const yrs = Array.from({length:25},(_,i)=>i+1);
+  let hdr = `<thead><tr><th>Статья, К€</th>` + yrs.map(y => `<th>Г${y}</th>`).join('') + `</tr></thead>`;
+  let body = '<tbody>';
+
+  body += `<tr><td>Экономия на закупке э/э</td>` + rows.map(r => `<td class="val pos">${f(r.revenue,0)}</td>`).join('') + `</tr>`;
+  body += `<tr><td>Операционные расходы (OPEX)</td>` + rows.map(
