@@ -1993,8 +1993,22 @@ function calcBuildCF(params) {
   }
   const irrVal = irr([-capex, ...rows.map(r => r.ncf)]);
 
+  // Payback with monthly precision via linear interpolation
   let pb = null;
-  rows.forEach(r => { if (pb === null && r.cum >= 0) pb = r.y; });
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].cum >= 0) {
+      if (i === 0) {
+        pb = rows[i].y;
+      } else {
+        const cumPrev = rows[i-1].cum; // negative
+        const cumCurr = rows[i].cum;   // positive or zero
+        const fraction = Math.abs(cumPrev) / (Math.abs(cumPrev) + cumCurr);
+        const months = Math.round(fraction * 12);
+        pb = { years: rows[i].y - 1, months: months };
+      }
+      break;
+    }
+  }
 
   const totalRev = rows.reduce((s, r) => s + r.revenue, 0);
   const totalGen = rows.reduce((s, r) => s + r.gen_mwh, 0);
@@ -2062,6 +2076,16 @@ function calcRenderChart(rows, capex) {
   svg.innerHTML = out;
 }
 
+
+// ─── FORMAT PAYBACK ───────────────────────────
+function fmtPb(pb, short=false) {
+  if (!pb) return '>25 лет';
+  if (typeof pb === 'number') return pb + (short ? ' л.' : ' лет');
+  const y = pb.years;
+  const m = pb.months;
+  if (short) return m > 0 ? y + ' л. ' + m + ' м.' : y + ' л.';
+  return m > 0 ? y + ' лет ' + m + ' мес.' : y + ' лет';
+}
 // ─── MAIN RECALC ──────────────────────────────────────────────
 function recalc() {
   const cf = calcBuildCF(V);
@@ -2069,7 +2093,7 @@ function recalc() {
   // KPIs
   document.getElementById('r-npv').textContent = calcF(cf.npv, 0) + ' К€';
   document.getElementById('r-irr').textContent = calcF(cf.irrVal * 100, 1) + '%';
-  document.getElementById('r-pb').textContent  = cf.pb ? cf.pb + ' лет' : '>25';
+  document.getElementById('r-pb').textContent  = fmtPb(cf.pb);
   document.getElementById('r-rev').textContent = calcF(cf.totalRev / 1000, 2) + ' М€';
   document.getElementById('r-gen').textContent = calcF(cf.totalGen / 1000, 1) + ' ГВт·ч';
 
@@ -3373,8 +3397,22 @@ function buildCF(capex) {
   }
   const irrVal = irr([-capex, ...rows.map(r => r.ncf)]);
 
+  // Payback with monthly precision via linear interpolation
   let pb = null;
-  rows.forEach(r => { if (pb === null && r.cum >= 0) pb = r.y; });
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].cum >= 0) {
+      if (i === 0) {
+        pb = rows[i].y;
+      } else {
+        const cumPrev = rows[i-1].cum; // negative
+        const cumCurr = rows[i].cum;   // positive or zero
+        const fraction = Math.abs(cumPrev) / (Math.abs(cumPrev) + cumCurr);
+        const months = Math.round(fraction * 12);
+        pb = { years: rows[i].y - 1, months: months };
+      }
+      break;
+    }
+  }
 
   const totalRev = rows.reduce((s,r) => s + r.revenue, 0);
   const totalGen = rows.reduce((s,r) => s + r.gen_mwh, 0);
@@ -3401,7 +3439,7 @@ function renderKpis(cf) {
     </div>
     <div class="kpi-card teal">
       <div class="kpi-label">Срок окупаемости</div>
-      <div class="kpi-value">${cf.pb ? cf.pb : '>25'}</div>
+      <div class="kpi-value">${fmtPbFin(cf.pb)}</div>
       <div class="kpi-unit">лет · простой (undiscounted)</div>
     </div>
     <div class="kpi-card">
@@ -3535,13 +3573,23 @@ function renderScenCards() {
       <div class="scen-detail">
         IRR: <span>${f(cf.irrVal*100,1)}%</span><br>
         NPV: <span>${f(cf.npv,0)} К€</span><br>
-        Payback: <span>${cf.pb ? cf.pb+' лет' : '>25 лет'}</span><br>
+        Payback: <span>${fmtPbFin(cf.pb)}</span><br>
         Уд. CAPEX: <span>${f(Math.round(s.capex*1000/P.power_dc))} €/кВт</span>
       </div>
     </div>`;
   }).join('');
 }
 
+
+// ─── FORMAT PAYBACK ───────────────────────────
+function fmtPbFin(pb, short=false) {
+  if (!pb) return '>25 лет';
+  if (typeof pb === 'number') return pb + (short ? ' л.' : ' лет');
+  const y = pb.years;
+  const m = pb.months;
+  if (short) return m > 0 ? y + ' л. ' + m + ' м.' : y + ' л.';
+  return m > 0 ? y + ' лет ' + m + ' мес.' : y + ' лет';
+}
 // ─── MAIN UPDATE ──────────────────────────────
 let prevNPV = null;
 
@@ -3549,7 +3597,7 @@ function updateFloatBar(cf) {
   // KPIs
   document.getElementById('ff-npv').textContent = f(cf.npv, 0) + ' К€';
   document.getElementById('ff-irr').textContent = f(cf.irrVal * 100, 1) + '%';
-  document.getElementById('ff-pb').textContent  = cf.pb ? cf.pb + ' л.' : '>25';
+  document.getElementById('ff-pb').textContent  = fmtPbFin(cf.pb, true);
   // Delta
   const deltaEl = document.getElementById('ff-npv-delta');
   if (prevNPV !== null) {
